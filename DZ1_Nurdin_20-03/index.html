@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-1</title>
+  </head>
+  <body>
+    <script>
+      var i = 0;
+      while (i === 0) {
+        var theNumberGrade = prompt("Пожалуйста, оцените наш сервер : ");
+        if (theNumberGrade >= 1 && theNumberGrade <= 5) {
+          alert("Мы работаем над улучшением нашего сервиса");
+        } else if (theNumberGrade >= 6 && theNumberGrade <= 10) {
+          alert("Спасибо за высокую оценку!");
+        } else {
+          alert("Оценка должна быть от 1 до 10");
+        }
+      }
+    </script>
+  </body>
+</html>
