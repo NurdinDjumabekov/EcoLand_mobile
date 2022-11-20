@@ -8,16 +8,14 @@
   </head>
   <body>
     <script>
-      var i = 0;
+      let i = 0;
       while (i === 0) {
-        var theNumberGrade = prompt("Пожалуйста, оцените наш сервер : ");
-        if (theNumberGrade >= 1 && theNumberGrade <= 5) {
-          alert("Мы работаем над улучшением нашего сервиса");
-        } else if (theNumberGrade >= 6 && theNumberGrade <= 10) {
-          alert("Спасибо за высокую оценку!");
-        } else {
-          alert("Оценка должна быть от 1 до 10");
-        }
+        let theNumberGrade = prompt("Пожалуйста, оцените наш сервер : ");
+        theNumberGrade >= 1 && theNumberGrade <= 5
+          ? alert("Мы работаем над улучшением нашего сервиса")
+          : theNumberGrade >= 6 && theNumberGrade <= 10
+          ? alert("Спасибо за высокую оценку!")
+          : alert("Оценка должна быть от 1 до 10");
       }
     </script>
   </body>
