@@ -1,13 +1,13 @@
 // первый калькулятор
 
-// function calculator(
+// const calculator = (
 //   a = Number(prompt("Введите первое число")),
 //   b = Number(prompt("Введите второе число")),
 //   c = Number(prompt("Введите третье число")),
 //   len = Number(
 //     prompt("Выбирите действие : 1.Умножение 2.Деление 3.Сложение 4.Вычитание ")
 //   )
-// ) {
+// ) => {
 //   if (len == 1) {
 //     let multiplication = a * b * c;
 //     alert("Ваш результат :" + multiplication);
@@ -23,17 +23,17 @@
 //   } else {
 //     alert("error");
 //   }
-// }
+// };
 // calculator();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // второй калькулятор
 
-// function calculator(
+// const calculator = (
 //   len = Number(
 //     prompt("Выбирите действие : 1.Умножение 2.Деление 3.Сложение 4.Вычитание ")
 //   )
-// ) {
+// ) => {
 //   let a = Number(prompt("Введите первое число"));
 //   let b = Number(prompt("Введите второе число"));
 //   let c = Number(prompt("Введите третье число"));
@@ -82,7 +82,7 @@
 //   prompt("Выбирите действие : 1.Умножение 2.Деление 3.Сложение 4.Вычитание ")
 // );
 // sumNumbers = Number(prompt("Задайте количество цифр,которое хотите ввести"));
-// function calculator(len, sumNumbers) {
+// const calculator = (len, sumNumbers) => {
 //   let sum = 1;
 //   let arr2 = [];
 //   let i = 0;
@@ -121,5 +121,5 @@
 //     i++;
 //   }
 //   alert(sum);
-// }
+// };
 // calculator(len, sumNumbers);
