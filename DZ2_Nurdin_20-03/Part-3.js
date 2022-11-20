@@ -1,16 +1,14 @@
 // let i = 0;
-// red = "красный";
-// yellow = "желтый";
-// green = "зеленый";
+// let red = "красный";
+// let yellow = "желтый";
+// let green = "зеленый";
 // while (i == 0) {
-//   traffic = prompt("Введите цвет : ");
-//   if (traffic == red) {
-//     alert("STOP!!!");
-//   } else if (traffic == yellow) {
-//     alert("Ожидайте");
-//   } else if (traffic == green) {
-//     alert("Можете идти!");
-//   } else {
-//     alert("Введите цвет светофора!!! И желательно с маленькой буквы!!!");
-//   }
+//   let traffic = prompt("Введите цвет : ");
+//   traffic === red
+//     ? alert("STOP!!!")
+//     : traffic === yellow
+//     ? alert("Ожидайте")
+//     : traffic === green
+//     ? alert("Можете идти!")
+//     : alert("Введите цвет светофора!!! И желательно с маленькой буквы!!!");
 // }
