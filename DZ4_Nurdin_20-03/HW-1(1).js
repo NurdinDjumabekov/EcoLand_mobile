@@ -17,4 +17,3 @@ b.addEventListener("click", function () {
   content.style.background = "green";
   content.style.color = "greenyellow";
 });
-

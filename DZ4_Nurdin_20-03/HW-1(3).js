@@ -21,4 +21,3 @@ if (cout === 1) {
 } else {
   alert("error");
 }
-
