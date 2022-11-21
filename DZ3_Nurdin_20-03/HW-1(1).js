@@ -7,4 +7,4 @@ const numberMin = (a, b) => {
     ? console.log("Числа ", a, "and", b, "равны!")
     : console.log("error");
 };
-numberMin(10, -10);
+numberMin(-100, -10);
