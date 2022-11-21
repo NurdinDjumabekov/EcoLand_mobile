@@ -1,7 +1,6 @@
 const input = document.getElementById("input");
 const create_button = document.getElementById("create_button");
 const todolist = document.getElementById("todo_list");
-
 function createTodo() {
   if (input.value.trim() === "") {
     return false;
@@ -36,12 +35,7 @@ function createTodo() {
   }
 }
 create_button.addEventListener("click", createTodo);
+////////////////////////////////////////////
 input.addEventListener("keydown", (e) => {
-  if (e.keyCode === 13) {
-    createTodo();
-  } else {
-    return false;
-  }
+  e.keyCode === 13 ? createTodo() : false;
 });
-
-
