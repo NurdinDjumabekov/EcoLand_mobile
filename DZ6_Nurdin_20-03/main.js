@@ -10,19 +10,19 @@ const reverss = () => {
     let str_1 = input_start.value;
     arr = str_1.split("");
     let arr_2 = arr.reverse();
-    let str_2 = arr.join();
+    let str_2 = arr_2.join();
     str_2 = str_2.replace(/[,\s]/gi, "");
     input_end.value = str_2;
     input_start.value = "";
   }
 };
 
-button.addEventListener("click", reverss);
+button.onclick = () => {
+  reverss();
+};
+
+// button.addEventListener("click", reverss);
 /////////////////////////////////////////////////
 input_start.addEventListener("keydown", (e) => {
-  if (e.keyCode === 13) {
-    reverss();
-  } else {
-    return false;
-  }
+  e.keyCode === 13 ? reverss() : false;
 });
