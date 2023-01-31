@@ -1,0 +1,60 @@
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.modal {
+    width: 500px;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+}
+
+.div_child{
+    width: 250px;
+    height: 250px;
+    margin: 60px auto;
+}
+h1 {
+text-align: center;
+}
+.h1_class {
+    font-size:40px ;
+    color: aquamarine;
+}
+.div_child_inner {
+    display: flex;
+    justify-content: space-between;
+    width: 175px;
+    margin: 0 auto;
+}
+.h2_class {
+    font-size:20px ;
+    color: yellow;
+}
+
+h3 {
+    font-size: 20px;
+    color: burlywood;
+    line-height: 17px;
+}
+button {
+    background-color: #fff;
+    border: 3px solid black;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-left: 90px;
+    margin-top: 15px;
+    width: 80px;
+    height: 40px;
+}
+
+
+
