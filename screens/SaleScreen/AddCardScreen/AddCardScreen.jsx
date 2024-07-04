@@ -5,9 +5,9 @@ import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
 import styles from "./style";
 
 /////// hooks
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TextInput } from "react-native";
-import { useState } from "react";
+import { useEffect } from "react";
 
 //////// components
 import { ViewButton } from "../../../customsTags/ViewButton";
@@ -15,35 +15,44 @@ import MaskInput from "react-native-mask-input";
 
 /////// helpers
 import { checNumInput, checkNumUser } from "../../../helpers/Data";
+import { transformNumber } from "../../../helpers/transformNumber";
 
 /////// img
 import camera from "../../../assets/images/camera.png";
 
 ////// fns
 import { TieCardWithUser } from "../../../store/reducers/requestSlice";
-import { transformNumber } from "../../../helpers/transformNumber";
+import { dataCardFN } from "../../../store/reducers/stateSlice";
 
 export const AddCardScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [data, setData] = useState({ fio: "", phone: "", card: "" });
+  const { dataCard } = useSelector((state) => state.stateSlice);
+
+  useEffect(() => {
+    dispatch(dataCardFN({ fio: "", phone: "", card: "" }));
+  }, []);
 
   const onChange = (name, text) => {
     const sanitizedText = text.replace(/[.,]/g, "");
-    setData({ ...data, [name]: sanitizedText });
+    dispatch(dataCardFN({ ...dataCard, [name]: sanitizedText }));
   };
 
-  console.log(data?.phone, "data");
+  const openCameraQrCard = () => navigation.navigate("ScannerCardScreen");
 
   const sendData = () => {
-    if (data.fio?.length < 5) {
+    if (dataCard.fio?.length < 5) {
       Alert.alert("Введите ФИО клиента");
-    } else if (!checkNumUser.test(data.phone)) {
+    } else if (!checkNumUser.test(dataCard?.phone)) {
       Alert.alert("Введите корректный номер телефона клиента");
-    } else if (data.card?.length !== 9) {
+    } else if (dataCard.card?.length !== 9) {
       Alert.alert("Введите корректный номер карты");
     } else {
-      const dataSend = { ...data, phone: `0${transformNumber(data?.phone)}` };
+      const dataSend = {
+        ...dataCard,
+        phone: `0${transformNumber(dataCard?.phone)}`,
+      };
+
       dispatch(TieCardWithUser({ dataSend, navigation }));
     }
   };
@@ -54,19 +63,21 @@ export const AddCardScreen = ({ navigation }) => {
         <Text style={styles.inputTitle}>Введите ФИО клиента</Text>
         <TextInput
           style={styles.inputFio}
-          value={data?.fio?.toString()}
+          value={dataCard?.fio?.toString()}
           onChangeText={(text) => onChange("fio", text)}
           placeholder="Джумабеков Нурдин"
+          placeholderTextColor={"rgba(66, 67, 68, 0.413)"}
         />
       </View>
       <View style={styles.inputBlock}>
         <Text style={styles.inputTitle}>Введите номер клиента</Text>
         <MaskInput
           style={styles.inputFio}
-          value={data?.phone?.toString()}
+          value={dataCard?.phone?.toString()}
           onChangeText={(text) => onChange("phone", text)}
           mask={checNumInput}
           keyboardType="numeric"
+          placeholderTextColor={"rgba(66, 67, 68, 0.413)"}
         />
       </View>
       <View style={styles.inputBlock}>
@@ -74,12 +85,13 @@ export const AddCardScreen = ({ navigation }) => {
         <View style={styles.numQrCode}>
           <TextInput
             style={styles.inputFioQR}
-            value={data?.card?.toString()}
+            value={dataCard?.card?.toString()}
             onChangeText={(text) => onChange("card", text)}
             keyboardType="numeric"
             maxLength={9}
+            placeholderTextColor={"rgba(66, 67, 68, 0.413)"}
           />
-          <TouchableOpacity style={styles.btnOpenQR}>
+          <TouchableOpacity style={styles.btnOpenQR} onPress={openCameraQrCard}>
             <Image source={camera} style={styles.btnImgQR} />
           </TouchableOpacity>
         </View>

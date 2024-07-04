@@ -61,6 +61,10 @@ export const sumSoputkaProds = (arr) => {
   return arr?.reduce((sum, item) => +sum + +item?.total_soputka, 0);
 };
 
+export const sumSaleProds = (arr) => {
+  return arr?.reduce((sum, item) => +sum + +item?.total, 0);
+};
+
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 export const formatCount = (count) => {

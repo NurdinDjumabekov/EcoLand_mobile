@@ -46,42 +46,40 @@ const MainSaleScreen = ({ navigation }) => {
   //// перенаправляю на страницу добавления карты
 
   return (
-    <>
-      <SafeAreaView>
-        <View style={styles.saleActionBlock}>
-          <TouchableOpacity style={styles.saleBlock} onPress={saleProd}>
-            <Text style={styles.cardTitle}>Продажа товара</Text>
-            <Image source={sale} style={styles.saleBlockImg} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.cardsBlock} onPress={addInfoCards}>
-            <Text style={styles.cardTitle}>Привязать карту</Text>
-            <Image source={card} style={styles.cardsBlockImg} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.selectBlock}>
-          <Text style={styles.title}>История продаж</Text>
-          {listSoldInvoice?.length === 0 ? (
-            <Text style={styles.noneData}>Продажи за смену отсутствуют</Text>
-          ) : (
-            <FlatList
-              data={listSoldInvoice}
-              renderItem={({ item, index }) => (
-                <AllHistoryInvoice
-                  item={item}
-                  index={index}
-                  keyLink={"SoldProductScreen"}
-                  navigation={navigation}
-                />
-              )}
-              keyExtractor={(item) => `${item?.guid}`}
-              refreshControl={
-                <RefreshControl refreshing={preloader} onRefresh={getData} />
-              }
-            />
-          )}
-        </View>
-      </SafeAreaView>
-    </>
+    <SafeAreaView>
+      <View style={styles.saleActionBlock}>
+        <TouchableOpacity style={styles.saleBlock} onPress={saleProd}>
+          <Text style={styles.cardTitle}>Продажа товара</Text>
+          <Image source={sale} style={styles.saleBlockImg} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.cardsBlock} onPress={addInfoCards}>
+          <Text style={styles.cardTitle}>Привязать карту</Text>
+          <Image source={card} style={styles.cardsBlockImg} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.selectBlock}>
+        <Text style={styles.title}>История продаж</Text>
+        {listSoldInvoice?.length === 0 ? (
+          <Text style={styles.noneData}>Продажи за смену отсутствуют</Text>
+        ) : (
+          <FlatList
+            data={listSoldInvoice}
+            renderItem={({ item, index }) => (
+              <AllHistoryInvoice
+                item={item}
+                index={index}
+                keyLink={"SoldProductScreen"}
+                navigation={navigation}
+              />
+            )}
+            keyExtractor={(item) => `${item?.guid}`}
+            refreshControl={
+              <RefreshControl refreshing={preloader} onRefresh={getData} />
+            }
+          />
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
 

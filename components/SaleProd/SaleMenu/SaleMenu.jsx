@@ -93,7 +93,7 @@ const SaleMenu = ({ navigation }) => {
         >
           <View style={styles.modalInner}>
             <Text style={styles.titleSelect}>
-              Введите 6ти значный QR Code товара
+              Введите 6ти значный код товара
             </Text>
             <TextInput
               style={styles.input}

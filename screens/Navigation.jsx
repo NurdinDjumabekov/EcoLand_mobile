@@ -64,6 +64,7 @@ import UserInfo from "../components/Header/UserInfo/UserInfo";
 /////// helpers
 import { getLocalDataUser } from "../helpers/returnDataUser";
 import { AddCardScreen } from "./SaleScreen/AddCardScreen/AddCardScreen";
+import ScannerCardScreen from "./SaleScreen/ScannerCardScreen/ScannerCardScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -75,8 +76,6 @@ export const Navigation = () => {
   useEffect(() => getLocalDataUser({ changeLocalData, dispatch }), []);
 
   const checkLogin = !data?.seller_guid;
-
-  console.log(data, "datad");
 
   return (
     <NavigationContainer>
@@ -194,11 +193,18 @@ export const Navigation = () => {
                 component={ScannerSaleScreen}
                 options={{ title: "Сканер" }} ////// сканер для продажи товара
               />
+
               {/* ///////// */}
+              {/* /////// для скарирование и добавления карты */}
               <Stack.Screen
                 name="AddCardScreen"
                 component={AddCardScreen}
                 options={{ title: "Добавление карты" }} ////// добавляю карту для продавца
+              />
+              <Stack.Screen
+                name="ScannerCardScreen"
+                component={ScannerCardScreen}
+                options={{ title: "Сканер для карты" }} ////// сканер для продажи товара
               />
             </>
 

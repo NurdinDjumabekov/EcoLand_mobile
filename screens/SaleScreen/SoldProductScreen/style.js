@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  soldBlock: {
+    flex: 1,
+    paddingBottom: 110,
+  },
+
   container: {
     backgroundColor: "rgba(162, 178, 238, 0.102)",
     minWidth: "100%",
@@ -38,10 +43,6 @@ const styles = StyleSheet.create({
     color: "rgba(47, 71, 190, 0.672)",
   },
 
-  // status: {
-  //   color: "rgba(12, 169, 70, 0.9)",
-  // },
-
   title: {
     fontSize: 15,
     fontWeight: "500",
@@ -70,19 +71,42 @@ const styles = StyleSheet.create({
     gap: 5,
   },
 
-  noneData: {
-    paddingTop: 250,
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "500",
-    color: "#222",
-    height: "100%",
+  flatList: { width: "100%", paddingTop: 8 },
+
+  actionBlock: {
+    position: "absolute",
+    bottom: 40,
+    width: "96%",
+    alignSelf: "center",
   },
 
-  flatList: {
+  actionBlockInner: {
     width: "100%",
-    paddingTop: 8,
-    paddingBottom: 40,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  result: {
+    fontSize: 20,
+    fontWeight: "500",
+    lineHeight: 20,
+    color: "rgba(47, 71, 190, 0.691)",
+  },
+
+  endSaleBtn: {
+    backgroundColor: "rgba(12, 169, 70, 0.9)",
+    color: "#fff",
+    width: "47%",
+    fontSize: 15,
+  },
+
+  addCard: {
+    backgroundColor: "rgba(47, 71, 190, 0.691)",
+    color: "#fff",
+    width: "47%",
+    fontSize: 16,
   },
 
   //////////////////// krestik
@@ -103,6 +127,15 @@ const styles = StyleSheet.create({
 
   deg: { transform: [{ rotate: "45deg" }] },
   degMinus: { transform: [{ rotate: "-45deg" }] },
+
+  noneData: {
+    paddingTop: 250,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#222",
+    height: "100%",
+  },
 });
 
 export default styles;

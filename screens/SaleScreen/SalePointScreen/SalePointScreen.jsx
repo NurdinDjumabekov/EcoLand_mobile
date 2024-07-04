@@ -49,7 +49,7 @@ export const SalePointScreen = ({ navigation }) => {
   return (
     <View style={styles.parentBlock}>
       <TouchableOpacity onPress={listProdSale} style={styles.arrow}>
-        <Text style={styles.textBtn}>Список продаж</Text>
+        <Text style={styles.textBtn}>Список выбранных товаров</Text>
         <View style={styles.arrowInner}></View>
       </TouchableOpacity>
       <EveryInvoiceSale navigation={navigation} />

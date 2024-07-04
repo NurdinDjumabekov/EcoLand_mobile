@@ -127,18 +127,6 @@ export const ScannerSaleScreen = ({ navigation }) => {
           useNativeDriver={false}
           edgeBorderWidth={5}
         />
-        {/* Визуализация рамки */}
-        {/* <View
-          style={{
-            position: "absolute",
-            left: FRAME_X,
-            top: FRAME_Y,
-            width: FRAME_WIDTH,
-            height: FRAME_HEIGHT,
-            borderWidth: 2,
-            borderColor: "red",
-          }}
-        /> */}
       </Camera>
     </View>
   );

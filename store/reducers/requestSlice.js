@@ -421,6 +421,7 @@ export const createInvoiceTT = createAsyncThunk(
   "createInvoiceTT",
   /// (открытие кассы) создание накладной торговый точкой на целый день
   async function (seller_guid, { dispatch, rejectWithValue }) {
+    console.log(`${API}/tt/create_invoice`);
     try {
       const response = await axios({
         method: "POST",
@@ -438,45 +439,27 @@ export const createInvoiceTT = createAsyncThunk(
   }
 );
 
-// /// closeInvoiceTT
-// export const closeInvoiceTT = createAsyncThunk(
-//   "closeInvoiceTT",
-//   /// закрытие кассы
-//   async function ({ invoice_guid, navigation }, { dispatch, rejectWithValue }) {
-//     try {
-//       const response = await axios({
-//         method: "POST",
-//         url: `${API}/tt/shift_end_invoice`,
-//         data: { invoice_guid },
-//       });
-//       if (response.status >= 200 && response.status < 300) {
-//         if (response.data.result == 1) {
-//           Alert.alert("Касса успешно закрыта");
-//           navigation.navigate("AllCategScreen");
-//         }
-//         return response.data.result;
-//       } else {
-//         throw Error(`Error: ${response.status}`);
-//       }
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+/// endSaleProds
+export const endSaleProds = createAsyncThunk(
+  "endSaleProds",
+  /// завершение продажи
+  async function (props, { dispatch, rejectWithValue }) {
+    const { invoice_guid, navigation } = props;
 
-/// createInvoiceForSale
-export const createInvoiceForSale = createAsyncThunk(
-  "createInvoiceForSale",
-  /// создание накладной для записи туда товаров
-  async function ({ invoice_guid }, { dispatch, rejectWithValue }) {
     try {
       const response = await axios({
         method: "POST",
-        url: `${API}/tt/create_invoice_sale`,
-        data: { invoice_guid, invoice_guid },
+        url: `${API}/tt/shift_end_invoice`,
+        data: { invoice_guid },
       });
+
+      console.log(`${API}/tt/shift_end_invoice`);
+
       if (response.status >= 200 && response.status < 300) {
-        return { codeid: response?.data?.codeid, guid: response?.data?.guid };
+        if (response.data.result == 1) {
+          navigation.navigate("AllCategScreen");
+        }
+        return response.data.result;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -485,6 +468,28 @@ export const createInvoiceForSale = createAsyncThunk(
     }
   }
 );
+
+// /// createInvoiceForSale
+// export const createInvoiceForSale = createAsyncThunk(
+//   "createInvoiceForSale",
+//   /// создание накладной для записи туда товаров
+//   async function ({ invoice_guid }, { dispatch, rejectWithValue }) {
+//     try {
+//       const response = await axios({
+//         method: "POST",
+//         url: `${API}/tt/create_invoice_sale`,
+//         data: { invoice_guid, invoice_guid },
+//       });
+//       if (response.status >= 200 && response.status < 300) {
+//         return { codeid: response?.data?.codeid, guid: response?.data?.guid };
+//       } else {
+//         throw Error(`Error: ${response.status}`);
+//       }
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 /// getEveryProd
 export const getEveryProd = createAsyncThunk(
@@ -585,10 +590,8 @@ export const getListSoldInvoice = createAsyncThunk(
   "getListSoldInvoice",
   async function (seller_guid, { dispatch, rejectWithValue }) {
     try {
-      const response = await axios({
-        method: "GET",
-        url: `${API}/tt/get_point_invoice?seller_guid=${seller_guid}`,
-      });
+      const url = `${API}/tt/get_point_invoice?seller_guid=${seller_guid}`;
+      const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
         return response?.data;
       } else {
@@ -1487,21 +1490,21 @@ const requestSlice = createSlice({
       state.preloader = true;
     });
 
-    // /////// closeInvoiceTT
-    // builder.addCase(closeInvoiceTT.fulfilled, (state, action) => {
-    //   state.preloader = false;
-    //   if (action.payload == 1) {
-    //     Alert.alert("Касса успешно закрыта");
-    //   }
-    // });
-    // builder.addCase(closeInvoiceTT.rejected, (state, action) => {
-    //   state.error = action.payload;
-    //   Alert.alert("Упс, что-то пошло не так! Не удалось закрыть кассу");
-    //   state.preloader = false;
-    // });
-    // builder.addCase(closeInvoiceTT.pending, (state, action) => {
-    //   state.preloader = true;
-    // });
+    /////// endSaleProds
+    builder.addCase(endSaleProds.fulfilled, (state, action) => {
+      state.preloader = false;
+      if (action.payload == 1) {
+        Alert.alert("Успешно продано!");
+      }
+    });
+    builder.addCase(endSaleProds.rejected, (state, action) => {
+      state.error = action.payload;
+      Alert.alert("Упс, что-то пошло не так! Не удалось закрыть кассу");
+      state.preloader = false;
+    });
+    builder.addCase(endSaleProds.pending, (state, action) => {
+      state.preloader = true;
+    });
 
     /////// getCategoryTT
     builder.addCase(getCategoryTT.fulfilled, (state, action) => {

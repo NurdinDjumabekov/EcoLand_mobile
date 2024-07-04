@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  dataLogin: { login: "Seller", password: "1234" },
+  dataLogin: { login: "2005", password: "2005" },
 
   acceptConfirmInvoice: { invoice_guid: "" },
   // для подтверждения и принятия товаров ТА в возврате тоже
 
   temporaryData: { price: "", ves: "", guid: "" },
-  ///// временные данные для добавление товаров в сопутку, возврат и продажу
+  // временные данные для добавление товаров в сопутку, возврат и продажу
 
   listProductForTT: [],
 
@@ -20,6 +20,8 @@ const initialState = {
   searchProd: "", /// для текста поиска продуктов
 
   expense: { expense_type: "", comment: "", amount: "" }, /// данные суммы расходов каждой ТТ
+
+  dataCard: { fio: "", phone: "", card: "" },
 };
 
 const stateSlice = createSlice({
@@ -30,7 +32,7 @@ const stateSlice = createSlice({
       state.dataLogin = action.payload;
     },
     clearLogin: (state) => {
-      state.dataLogin = { login: "Seller", password: "1234" };
+      state.dataLogin = { login: "2005", password: "2005" };
     },
 
     changeAcceptInvoiceTT: (state, action) => {
@@ -82,11 +84,11 @@ const stateSlice = createSlice({
       state.expense = action.payload;
     },
     clearExpense: (state, action) => {
-      state.expense = {
-        expense_type: "",
-        comment: "",
-        amount: "",
-      };
+      state.expense = { expense_type: "", comment: "", amount: "" };
+    },
+
+    dataCardFN: (state, action) => {
+      state.dataCard = action.payload;
     },
   },
 });
@@ -105,6 +107,7 @@ export const {
   changeSearchProd,
   changeExpense,
   clearExpense,
+  dataCardFN,
 } = stateSlice.actions;
 
 export default stateSlice.reducer;

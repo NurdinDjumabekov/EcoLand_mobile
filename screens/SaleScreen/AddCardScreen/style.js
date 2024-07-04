@@ -45,21 +45,18 @@ const styles = StyleSheet.create({
   },
 
   btnOpenQR: {
-    height: 48,
+    height: 50,
     width: 65,
-    backgroundColor: "rgba(97, 112, 188, 0.572)",
     borderRadius: 4,
-    // borderWidth: 2,
-    // borderColor: "#222",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#222",
   },
 
   btnImgQR: {
-    width: "90%",
-    height: "90%",
-    objectFit: "contain",
+    width: "100%",
+    height: "100%",
   },
 
   addCardBtn: {
