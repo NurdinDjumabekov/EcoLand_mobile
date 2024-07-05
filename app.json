@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Riha",
-    "slug": "riha-torgovaya-tochka",
+    "name": "Ecoland",
+    "slug": "ecoland-torgovaya-tochka",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,14 +22,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "Riha.sale.point"
+      "package": "Ecoland.sale.point"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "cc0ce941-c7ad-43d8-bc21-0cfbaac083e8"
+        "projectId": "5e3964d0-07aa-4983-88c7-2654ed54e5e8"
       }
     }
   }

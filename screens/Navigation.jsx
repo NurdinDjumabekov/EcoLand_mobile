@@ -63,10 +63,10 @@ import UserInfo from "../components/Header/UserInfo/UserInfo";
 
 /////// helpers
 import { getLocalDataUser } from "../helpers/returnDataUser";
-import { AddCardScreen } from "./SaleScreen/AddCardScreen/AddCardScreen";
-import ScannerCardScreen from "./SaleScreen/ScannerCardScreen/ScannerCardScreen";
+import { AddCardScreen } from "./CardsScreen/AddCardScreen/AddCardScreen";
+import ScannerCardScreen from "./CardsScreen/ScannerCardScreen/ScannerCardScreen";
 import ScannerAddBonusScreen from "./CardsScreen/ScannerAddBonusScreen/ScannerAddBonusScreen";
-import { AddBonusScreen } from "./SaleScreen/AddBonusScreen/AddBonusScreen";
+import { AddBonusScreen } from "./CardsScreen/AddBonusScreen/AddBonusScreen";
 import { SoldProdHistoryScreen } from "./SaleScreen/SoldProdHistoryScreen/SoldProdHistoryScreen";
 
 const Stack = createNativeStackNavigator();
@@ -196,15 +196,16 @@ export const Navigation = () => {
                 component={ScannerSaleScreen}
                 options={{ title: "Сканер" }} ////// сканер для продажи товара
               />
-
               <Stack.Screen
                 name="SoldProdHistoryScreen"
                 component={SoldProdHistoryScreen}
                 ////// список проданных товаров каждой накладной
               />
+            </>
 
-              {/* ///////// */}
-              {/* /////// для скарирование и добавления карты */}
+            <>
+              {/* /////////////////////// Cards page  /////////////////////////*/}
+              {/* ///////////////////////////////////////////////*/}
               <Stack.Screen
                 name="AddCardScreen"
                 component={AddCardScreen}

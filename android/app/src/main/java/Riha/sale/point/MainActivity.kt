@@ -1,4 +1,4 @@
-package Riha.sale.point
+package Ecoland.sale.point
 
 import android.os.Build
 import android.os.Bundle

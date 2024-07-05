@@ -1,5 +1,5 @@
 {
-  "name": "riha_point_sale",
+  "name": "ecoland_point_sale",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {

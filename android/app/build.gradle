@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'Riha.sale.point'
+    namespace 'Ecoland.sale.point'
     defaultConfig {
-        applicationId 'Riha.sale.point'
+        applicationId 'Ecoland.sale.point'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

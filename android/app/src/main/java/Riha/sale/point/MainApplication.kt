@@ -1,4 +1,4 @@
-package Riha.sale.point
+package Ecoland.sale.point
 
 import android.app.Application
 import android.content.res.Configuration

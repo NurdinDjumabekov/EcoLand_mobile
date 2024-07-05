@@ -497,28 +497,6 @@ export const getBonusCard = createAsyncThunk(
   }
 );
 
-// /// createInvoiceForSale
-// export const createInvoiceForSale = createAsyncThunk(
-//   "createInvoiceForSale",
-//   /// создание накладной для записи туда товаров
-//   async function ({ invoice_guid }, { dispatch, rejectWithValue }) {
-//     try {
-//       const response = await axios({
-//         method: "POST",
-//         url: `${API}/tt/create_invoice_sale`,
-//         data: { invoice_guid, invoice_guid },
-//       });
-//       if (response.status >= 200 && response.status < 300) {
-//         return { codeid: response?.data?.codeid, guid: response?.data?.guid };
-//       } else {
-//         throw Error(`Error: ${response.status}`);
-//       }
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 /// getEveryProd
 export const getEveryProd = createAsyncThunk(
   /// получаю каждый продукт по qrcode или guid для продажи
