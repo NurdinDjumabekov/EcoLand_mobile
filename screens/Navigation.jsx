@@ -65,6 +65,9 @@ import UserInfo from "../components/Header/UserInfo/UserInfo";
 import { getLocalDataUser } from "../helpers/returnDataUser";
 import { AddCardScreen } from "./SaleScreen/AddCardScreen/AddCardScreen";
 import ScannerCardScreen from "./SaleScreen/ScannerCardScreen/ScannerCardScreen";
+import ScannerAddBonusScreen from "./CardsScreen/ScannerAddBonusScreen/ScannerAddBonusScreen";
+import { AddBonusScreen } from "./SaleScreen/AddBonusScreen/AddBonusScreen";
+import { SoldProdHistoryScreen } from "./SaleScreen/SoldProdHistoryScreen/SoldProdHistoryScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -180,7 +183,7 @@ export const Navigation = () => {
               />
               <Stack.Screen
                 name="SoldProductScreen"
-                component={SoldProductScreen} /// список проданных товаров
+                component={SoldProductScreen} /// список продаваемых товаров
                 options={{ title: "Список продаж" }}
               />
               <Stack.Screen
@@ -194,6 +197,12 @@ export const Navigation = () => {
                 options={{ title: "Сканер" }} ////// сканер для продажи товара
               />
 
+              <Stack.Screen
+                name="SoldProdHistoryScreen"
+                component={SoldProdHistoryScreen}
+                ////// список проданных товаров каждой накладной
+              />
+
               {/* ///////// */}
               {/* /////// для скарирование и добавления карты */}
               <Stack.Screen
@@ -205,6 +214,16 @@ export const Navigation = () => {
                 name="ScannerCardScreen"
                 component={ScannerCardScreen}
                 options={{ title: "Сканер для карты" }} ////// сканер для продажи товара
+              />
+              <Stack.Screen
+                name="ScannerAddBonusScreen"
+                component={ScannerAddBonusScreen}
+                options={{ title: "Бонусы" }} ////// сканер для бонусов
+              />
+              <Stack.Screen
+                name="AddBonusScreen"
+                component={AddBonusScreen}
+                options={{ title: "Бонусы" }} ////// добавляю бонусы к продаже
               />
             </>
 

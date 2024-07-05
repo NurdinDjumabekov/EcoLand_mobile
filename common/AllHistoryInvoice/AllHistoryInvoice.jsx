@@ -1,17 +1,17 @@
+////// tags
 import { Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+
+////// helpers
 import { formatCount } from "../../helpers/amounts";
 
-////style
+////// style
 import styles from "./style";
 
 export const AllHistoryInvoice = (props) => {
   ////// отображаю все истонии накладных
   const { item, index, keyLink, navigation } = props;
 
-  const nav = (guidInvoice) => {
-    navigation.navigate(keyLink, { guidInvoice });
-  };
+  const nav = (guidInvoice) => navigation.navigate(keyLink, { guidInvoice });
 
   return (
     <TouchableOpacity

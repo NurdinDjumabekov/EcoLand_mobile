@@ -39,11 +39,11 @@ export const SoputkaProdHistoryScreen = ({ navigation, route }) => {
     navigation.setOptions({ title: `${listProdSoputka?.[0]?.date}` });
   }, [listProdSoputka?.[0]?.date]);
 
-  useEffect(() => getData(), []);
-
   const getData = () => {
     dispatch(getListSoputkaProd(guidInvoice));
   };
+
+  useEffect(() => getData(), []);
 
   const confirmBtn = () => {
     dispatch(confirmSoputka({ invoice_guid: guidInvoice, navigation }));

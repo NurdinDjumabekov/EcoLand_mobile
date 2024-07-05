@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  dataLogin: { login: "2005", password: "2005" },
+  dataLogin: { login: "1234", password: "1234" },
 
   acceptConfirmInvoice: { invoice_guid: "" },
   // для подтверждения и принятия товаров ТА в возврате тоже
@@ -22,6 +22,8 @@ const initialState = {
   expense: { expense_type: "", comment: "", amount: "" }, /// данные суммы расходов каждой ТТ
 
   dataCard: { fio: "", phone: "", card: "" },
+
+  saleDiscount: { bonuse: 0, user_guid: 0 },
 };
 
 const stateSlice = createSlice({
@@ -32,7 +34,7 @@ const stateSlice = createSlice({
       state.dataLogin = action.payload;
     },
     clearLogin: (state) => {
-      state.dataLogin = { login: "2005", password: "2005" };
+      state.dataLogin = { login: "1234", password: "1234" };
     },
 
     changeAcceptInvoiceTT: (state, action) => {
@@ -90,6 +92,10 @@ const stateSlice = createSlice({
     dataCardFN: (state, action) => {
       state.dataCard = action.payload;
     },
+
+    saleDiscountFN: (state, action) => {
+      state.saleDiscount = action.payload;
+    },
   },
 });
 export const {
@@ -108,6 +114,7 @@ export const {
   changeExpense,
   clearExpense,
   dataCardFN,
+  saleDiscountFN,
 } = stateSlice.actions;
 
 export default stateSlice.reducer;

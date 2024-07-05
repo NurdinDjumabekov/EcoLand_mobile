@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  listSoldsProd: { flex: 1, paddingBottom: 10 },
+
   title: {
     padding: 12,
     fontSize: 18,
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 
-  selectBlock: { height: "87%" },
+  selectBlock: { flex: 1 },
 
   saleActionBlock: {
     textAlign: "center",

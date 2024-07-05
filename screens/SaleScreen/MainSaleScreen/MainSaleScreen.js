@@ -12,6 +12,7 @@ import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryI
 ////// fns
 import { createInvoiceTT } from "../../../store/reducers/requestSlice";
 import { getListSoldInvoice } from "../../../store/reducers/requestSlice";
+import { saleDiscountFN } from "../../../store/reducers/stateSlice";
 
 ////// style
 import styles from "./style";
@@ -40,13 +41,14 @@ const MainSaleScreen = ({ navigation }) => {
   const saleProd = () => {
     navigation.navigate("SalePointScreen", { invoice_guid: infoKassa?.guid });
     //// перенаправляю на страницу продажи с guid накладной, куда нуэно записать нынешние продажи
+    dispatch(saleDiscountFN({ bonuse: 0, user_guid: 0 })); //// сбрасываю бонусы карт пользователя
   };
 
   const addInfoCards = () => navigation.navigate("AddCardScreen");
   //// перенаправляю на страницу добавления карты
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.listSoldsProd}>
       <View style={styles.saleActionBlock}>
         <TouchableOpacity style={styles.saleBlock} onPress={saleProd}>
           <Text style={styles.cardTitle}>Продажа товара</Text>
@@ -68,7 +70,7 @@ const MainSaleScreen = ({ navigation }) => {
               <AllHistoryInvoice
                 item={item}
                 index={index}
-                keyLink={"SoldProductScreen"}
+                keyLink={"SoldProdHistoryScreen"}
                 navigation={navigation}
               />
             )}

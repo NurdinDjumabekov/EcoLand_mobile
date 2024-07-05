@@ -444,22 +444,50 @@ export const endSaleProds = createAsyncThunk(
   "endSaleProds",
   /// завершение продажи
   async function (props, { dispatch, rejectWithValue }) {
-    const { invoice_guid, navigation } = props;
+    const { invoice_guid, navigation, user_guid, bonuse } = props;
 
     try {
       const response = await axios({
         method: "POST",
-        url: `${API}/tt/shift_end_invoice`,
-        data: { invoice_guid },
+        url: `${API}/tt/point_sale_confirm`,
+        data: { invoice_guid, user_guid, bonuse },
       });
-
-      console.log(`${API}/tt/shift_end_invoice`);
-
       if (response.status >= 200 && response.status < 300) {
-        if (response.data.result == 1) {
+        if (response.data?.result == 1) {
           navigation.navigate("AllCategScreen");
         }
         return response.data.result;
+      } else {
+        throw Error(`Error: ${response.status}`);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+/// getBonusCard
+export const getBonusCard = createAsyncThunk(
+  "getBonusCard",
+  /// завершение продажи
+  async function (props, { dispatch, rejectWithValue }) {
+    const { card_bonus, navigation, invoice_guid } = props;
+
+    try {
+      const response = await axios(`${API}/tt/scan_card/?qrcode=${card_bonus}`);
+
+      if (response.status >= 200 && response.status < 300) {
+        const obj = { ...response.data, invoice_guid };
+
+        if (obj?.result == 1) {
+          navigation.navigate("AddBonusScreen", { obj });
+        } else if (obj?.result == 0) {
+          Alert.alert("Карта с таким номером не существует!");
+        } else if (+obj?.result === -1) {
+          Alert.alert("Эта карта не пренодлежит никакому клиенту!");
+        }
+
+        return response.data;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -609,12 +637,10 @@ export const getListSoldProd = createAsyncThunk(
   "getListSoldProd",
   async function (guidInvoice, { dispatch, rejectWithValue }) {
     try {
-      const response = await axios({
-        method: "GET",
-        url: `${API}/tt/get_point_invoice_product?invoice_guid=${guidInvoice}`,
-      });
+      const url = `${API}/tt/get_point_invoice_product?invoice_guid=${guidInvoice}`;
+      const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
-        return response?.data?.[0]?.list;
+        return response?.data?.[0]?.list || [];
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -1506,6 +1532,19 @@ const requestSlice = createSlice({
       state.preloader = true;
     });
 
+    /////// getBonusCard
+    builder.addCase(getBonusCard.fulfilled, (state, action) => {
+      state.preloader = false;
+    });
+    builder.addCase(getBonusCard.rejected, (state, action) => {
+      state.error = action.payload;
+      Alert.alert("Упс, что-то пошло не так! Не удалось отсканировать карту");
+      state.preloader = false;
+    });
+    builder.addCase(getBonusCard.pending, (state, action) => {
+      state.preloader = true;
+    });
+
     /////// getCategoryTT
     builder.addCase(getCategoryTT.fulfilled, (state, action) => {
       state.preloader = false;
@@ -1639,13 +1678,14 @@ const requestSlice = createSlice({
     /////// TieCardWithUser
     builder.addCase(TieCardWithUser.fulfilled, (state, action) => {
       /// 0 - error
-      /// 1 - карту приклеплена успешно
+      /// 1 - карту приязана успешно
       /// -1 - Данная карта не активна!
       /// -2 - Данная карта занята!
+      /// -3 - клиент с таким номером уже существует!
       state.preloader = false;
       const { result } = action.payload;
 
-      console.log(result, "result");
+      // console.log(result, "result");
 
       if (result == 1) {
         Alert.alert("Карта была успешно привязана");
@@ -1653,6 +1693,8 @@ const requestSlice = createSlice({
         Alert.alert("Неверный номер карты");
       } else if (result == -2) {
         Alert.alert("Данная карта занята другим пользователем");
+      } else if (result == -3) {
+        Alert.alert("Клиент с таким номером уже существует!");
       }
     });
     builder.addCase(TieCardWithUser.rejected, (state, action) => {

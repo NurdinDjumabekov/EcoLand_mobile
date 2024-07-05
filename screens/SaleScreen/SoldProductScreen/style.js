@@ -1,10 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  soldBlock: {
-    flex: 1,
-    paddingBottom: 110,
-  },
+  soldBlock: { flex: 1, paddingBottom: 100 },
 
   container: {
     backgroundColor: "rgba(162, 178, 238, 0.102)",
@@ -52,15 +49,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  price: {
-    fontSize: 15,
-    fontWeight: "400",
-  },
+  price: { fontSize: 15, fontWeight: "400" },
 
   totalPrice: {
     fontSize: 14,
     fontWeight: "500",
-    // marginTop: 15,
     color: "rgba(12, 169, 70, 0.9)",
   },
 
@@ -73,11 +66,15 @@ const styles = StyleSheet.create({
 
   flatList: { width: "100%", paddingTop: 8 },
 
+  /////// actions
+
   actionBlock: {
     position: "absolute",
     bottom: 40,
-    width: "96%",
+    padding: 10,
     alignSelf: "center",
+    borderTopColor: "rgba(47, 71, 190, 0.691)",
+    borderTopWidth: 1,
   },
 
   actionBlockInner: {
@@ -89,10 +86,29 @@ const styles = StyleSheet.create({
   },
 
   result: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "500",
     lineHeight: 20,
     color: "rgba(47, 71, 190, 0.691)",
+    color: "rgba(12, 169, 70, 0.9)",
+  },
+
+  resultDiscount: {
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 20,
+    color: "red",
+    marginTop: 5,
+  },
+
+  resultAll: {
+    fontSize: 18,
+    fontWeight: "500",
+    lineHeight: 20,
+    color: "rgba(47, 71, 190, 0.691)",
+    marginTop: 7,
+    marginBottom: 5,
+    textDecorationLine: "underline",
   },
 
   endSaleBtn: {
