@@ -575,7 +575,7 @@ export const TieCardWithUser = createAsyncThunk(
       if (response.status >= 200 && response.status < 300) {
         const { result } = response?.data;
 
-        if (result == 1) {
+        if (result == 1 || result == 0) {
           navigation.navigate("AllCategScreen");
         }
 
@@ -1663,9 +1663,7 @@ const requestSlice = createSlice({
       state.preloader = false;
       const { result } = action.payload;
 
-      // console.log(result, "result");
-
-      if (result == 1) {
+      if (result == 1 || result == 0) {
         Alert.alert("Карта была успешно привязана");
       } else if (result == -1) {
         Alert.alert("Неверный номер карты");
