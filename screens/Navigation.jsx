@@ -108,7 +108,7 @@ export const Navigation = () => {
             <>
               {/* /////////////////////// принятие накладных  товара для продажи ////////////////////////*/}
               {/* ///////////////////////////////////////////////*/}
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="AcceptInvoiceProdScreen"
                 component={AcceptInvoiceProdScreen}
                 options={{ title: "Список накладных" }}
@@ -126,13 +126,13 @@ export const Navigation = () => {
               <Stack.Screen
                 name="EveryInvoiceAcceptScreen"
                 component={EveryInvoiceAcceptScreen}
-              />
+              /> */}
             </>
 
             <>
               {/* /////////////////////// Сопутка ///////////////////////*/}
               {/* ///////////////////////////////////////////////*/}
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Soputka"
                 component={SoputkaScreen}
                 options={{ title: "Сопутка" }}
@@ -150,7 +150,7 @@ export const Navigation = () => {
               <Stack.Screen
                 name="SoputkaProdHistoryScreen"
                 component={SoputkaProdHistoryScreen} ////// просмотр каждой истории сопутки
-              />
+              /> */}
             </>
 
             <>
@@ -164,7 +164,7 @@ export const Navigation = () => {
             </>
 
             <>
-              {/* /////////////////////// Продажа /////////////////////////*/}
+              {/* //////////////////////// Продажа /////////////////////////*/}
               {/* ///////////////////////////////////////////////*/}
               <Stack.Screen
                 name="MainSaleScreen"
@@ -231,17 +231,17 @@ export const Navigation = () => {
             <>
               {/* /////////////////////// Траты /////////////////////// */}
               {/* ///////////////////////////////////////////////*/}
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Spending"
                 component={StoreSpendingScreen}
                 options={{ title: "Расходы" }}
-              />
+              /> */}
             </>
 
             <>
               {/* /////////////////////// 0плата ТТ && HistoryBalance /////////////////////// */}
               {/* ///////////////////////////////////////////////*/}
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="PayMoney"
                 component={PayMoneyScreen}
                 options={{ title: "Оплата" }}
@@ -250,7 +250,7 @@ export const Navigation = () => {
                 name="HistoryBalance"
                 component={HistoryBalance}
                 options={{ title: "История баланса" }}
-              />
+              /> */}
             </>
 
             <>
@@ -280,7 +280,7 @@ export const Navigation = () => {
             <>
               {/* /////////////////////// Ревизия /////////////////////// */}
               {/* ///////////////////////////////////////////////*/}
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="CheckTovarScreen"
                 component={CheckTovarScreen}
                 options={{ title: "Ревизия" }}
@@ -307,7 +307,7 @@ export const Navigation = () => {
                 name="ListCheckProdScreen"
                 component={ListCheckProdScreen}
                 options={{ title: "" }}
-              />
+              /> */}
             </>
           </>
         )}

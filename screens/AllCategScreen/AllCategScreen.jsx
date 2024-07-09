@@ -28,16 +28,16 @@ export const AllCategScreen = ({ navigation }) => {
   const { data } = useSelector((state) => state.saveDataSlice);
   const { preloader, balance } = useSelector((state) => state.requestSlice);
 
+  const getData = async () => {
+    await getLocalDataUser({ changeLocalData, dispatch });
+    await dispatch(getBalance(data?.seller_guid));
+  };
+
   useFocusEffect(
     useCallback(() => {
       getData();
     }, [])
   );
-
-  const getData = async () => {
-    await getLocalDataUser({ changeLocalData, dispatch });
-    await dispatch(getBalance(data?.seller_guid));
-  };
 
   const goPage = () => navigation.navigate("HistoryBalance");
 

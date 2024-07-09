@@ -9,12 +9,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 
-  flatList: {
-    minWidth: "100%",
-    alignItems: "center",
-    gap: 10,
-    paddingBottom: 10,
-  },
+  flatList: { minWidth: "100%", paddingBottom: 10 },
 
   balance: {
     width: "97%",
