@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, Vibration } from "react-native";
 //////// components
 import { Camera } from "expo-camera";
 import BarcodeMask from "react-native-barcode-mask";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 //////// hooks
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +19,6 @@ import styles from "./style";
 export const ScannerCardScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -41,11 +41,11 @@ export const ScannerCardScreen = ({ navigation }) => {
     }
   };
 
-  if (!permission) {
+  if (!hasPermission) {
     return <View />;
   }
 
-  if (!permission.granted || hasPermission === null) {
+  if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: "center" }}>
@@ -57,7 +57,7 @@ export const ScannerCardScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Camera
+      <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : showResultModal}
         style={StyleSheet.absoluteFillObject}
       >
@@ -74,7 +74,7 @@ export const ScannerCardScreen = ({ navigation }) => {
           useNativeDriver={false}
           edgeBorderWidth={5}
         />
-      </Camera>
+      </BarCodeScanner>
     </View>
   );
 };

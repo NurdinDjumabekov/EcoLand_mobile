@@ -11,6 +11,13 @@ import ScannerSaleScreen from "./SaleScreen/ScannerSaleScreen/ScannerSaleScreen"
 import { SalePointScreen } from "./SaleScreen/SalePointScreen/SalePointScreen";
 import { SoldProductScreen } from "./SaleScreen/SoldProductScreen/SoldProductScreen";
 import SaleSearchScreen from "./SaleScreen/SaleSearchScreen/SaleSearchScreen";
+import { SoldProdHistoryScreen } from "./SaleScreen/SoldProdHistoryScreen/SoldProdHistoryScreen";
+
+////// CardsScreen
+import { AddCardScreen } from "./CardsScreen/AddCardScreen/AddCardScreen";
+import ScannerCardScreen from "./CardsScreen/ScannerCardScreen/ScannerCardScreen";
+import ScannerAddBonusScreen from "./CardsScreen/ScannerAddBonusScreen/ScannerAddBonusScreen";
+import { AddBonusScreen } from "./CardsScreen/AddBonusScreen/AddBonusScreen";
 
 ////// LoginScreen
 import { LoginScreen } from "./LoginScreen/LoginScreen";
@@ -20,32 +27,6 @@ import { AllCategScreen } from "./AllCategScreen/AllCategScreen";
 
 ////// LeftoversScreen
 import { LeftoversScreen } from "./LeftoversScreen/LeftoversScreen";
-
-/////// SpendingScreens
-import { StoreSpendingScreen } from "./SpendingScreens/StoreSpendingScreen";
-
-/////// MainInvoiceProdScreen
-import { AcceptInvoiceProdScreen } from "./MainInvoiceProdScreen/AcceptInvoiceProdScreen/AcceptInvoiceProdScreen";
-import { DetailedInvoiceProdScreen } from "./MainInvoiceProdScreen/DetailedInvoiceProdScreen/DetailedInvoiceProdScreen";
-import { AcceptInvoiceHistoryScreen } from "./MainInvoiceProdScreen/AcceptInvoiceHistoryScreen/AcceptInvoiceHistoryScreen";
-import { EveryInvoiceAcceptScreen } from "./MainInvoiceProdScreen/EveryInvoiceAcceptScreen/EveryInvoiceAcceptScreen";
-
-/////// PayScreen
-import { PayMoneyScreen } from "./PayScreen/PayMoneyScreen/PayMoneyScreen";
-import { HistoryBalance } from "./PayScreen/HistoryBalance/HistoryBalance";
-
-/////// SoputkaScreen
-import { SoputkaScreen } from "./SoputkaScreen/SoputkaScreen/SoputkaScreen";
-import { AddProdSoputkaSrceen } from "./SoputkaScreen/AddProdSoputkaSrceen/AddProdSoputkaSrceen";
-import { SoputkaProductScreen } from "./SoputkaScreen/SoputkaProductScreen/SoputkaProductScreen";
-import { SoputkaProdHistoryScreen } from "./SoputkaScreen/SoputkaProdHistoryScreen/SoputkaProdHistoryScreen";
-
-/////// CheckTovarScreen
-import { CheckTovarScreen } from "./CheckTovarScreen/CheckTovarScreen/CheckTovarScreen";
-import { InvoiceCheckScreen } from "./CheckTovarScreen/InvoiceCheckScreen/InvoiceCheckScreen";
-import { ListCheckProdScreen } from "./CheckTovarScreen/ListCheckProdScreen/ListCheckProdScreen";
-import { EveryRevisionRequestScreen } from "./CheckTovarScreen/EveryRevisionRequestScreen/EveryRevisionRequestScreen";
-import { RevisionRequestScreen } from "./CheckTovarScreen/RevisionRequestScreen/RevisionRequestScreen";
 
 /////// ReturnScreen
 import { MyReturnsScreen } from "./ReturnScreen/MyReturnsScreen/MyReturnsScreen";
@@ -63,11 +44,6 @@ import UserInfo from "../components/Header/UserInfo/UserInfo";
 
 /////// helpers
 import { getLocalDataUser } from "../helpers/returnDataUser";
-import { AddCardScreen } from "./CardsScreen/AddCardScreen/AddCardScreen";
-import ScannerCardScreen from "./CardsScreen/ScannerCardScreen/ScannerCardScreen";
-import ScannerAddBonusScreen from "./CardsScreen/ScannerAddBonusScreen/ScannerAddBonusScreen";
-import { AddBonusScreen } from "./CardsScreen/AddBonusScreen/AddBonusScreen";
-import { SoldProdHistoryScreen } from "./SaleScreen/SoldProdHistoryScreen/SoldProdHistoryScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -76,7 +52,9 @@ export const Navigation = () => {
 
   const { data } = useSelector((state) => state.saveDataSlice);
 
-  useEffect(() => getLocalDataUser({ changeLocalData, dispatch }), []);
+  useEffect(() => {
+    getLocalDataUser({ changeLocalData, dispatch });
+  }, []);
 
   const checkLogin = !data?.seller_guid;
 
@@ -104,54 +82,6 @@ export const Navigation = () => {
                 headerRight: () => <LogOut navigation={navigation} />,
               })}
             />
-
-            <>
-              {/* /////////////////////// принятие накладных  товара для продажи ////////////////////////*/}
-              {/* ///////////////////////////////////////////////*/}
-              {/* <Stack.Screen
-                name="AcceptInvoiceProdScreen"
-                component={AcceptInvoiceProdScreen}
-                options={{ title: "Список накладных" }}
-              />
-              <Stack.Screen
-                name="DetailedInvoiceProdScreen"
-                component={DetailedInvoiceProdScreen}
-                options={{ title: "Принятие накладной" }}
-              />
-              <Stack.Screen
-                name="AcceptInvoiceHistoryScreen"
-                component={AcceptInvoiceHistoryScreen}
-                options={{ title: "Список принятых накладных" }}
-              />
-              <Stack.Screen
-                name="EveryInvoiceAcceptScreen"
-                component={EveryInvoiceAcceptScreen}
-              /> */}
-            </>
-
-            <>
-              {/* /////////////////////// Сопутка ///////////////////////*/}
-              {/* ///////////////////////////////////////////////*/}
-              {/* <Stack.Screen
-                name="Soputka"
-                component={SoputkaScreen}
-                options={{ title: "Сопутка" }}
-              />
-              <Stack.Screen
-                name="AddProdSoputkaSrceen"
-                component={AddProdSoputkaSrceen}
-                options={{ title: "" }}
-              />
-              <Stack.Screen
-                name="SoputkaProductScreen"
-                component={SoputkaProductScreen}
-                options={{ title: "Сопутствующие товары" }} ////// список сопутствующих товаров
-              />
-              <Stack.Screen
-                name="SoputkaProdHistoryScreen"
-                component={SoputkaProdHistoryScreen} ////// просмотр каждой истории сопутки
-              /> */}
-            </>
 
             <>
               {/* /////////////////////// Остатки ///////////////////////*/}
@@ -229,31 +159,6 @@ export const Navigation = () => {
             </>
 
             <>
-              {/* /////////////////////// Траты /////////////////////// */}
-              {/* ///////////////////////////////////////////////*/}
-              {/* <Stack.Screen
-                name="Spending"
-                component={StoreSpendingScreen}
-                options={{ title: "Расходы" }}
-              /> */}
-            </>
-
-            <>
-              {/* /////////////////////// 0плата ТТ && HistoryBalance /////////////////////// */}
-              {/* ///////////////////////////////////////////////*/}
-              {/* <Stack.Screen
-                name="PayMoney"
-                component={PayMoneyScreen}
-                options={{ title: "Оплата" }}
-              />
-              <Stack.Screen
-                name="HistoryBalance"
-                component={HistoryBalance}
-                options={{ title: "История баланса" }}
-              /> */}
-            </>
-
-            <>
               {/* /////////////////////// Возврат /////////////////////// */}
               {/* ///////////////////////////////////////////////*/}
               <Stack.Screen
@@ -266,47 +171,14 @@ export const Navigation = () => {
                 component={DetailedInvoiceReturn}
                 options={{ title: "Принятие накладной" }}
               />
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="AcceptReturnHistoryScreen"
                 component={AcceptReturnHistoryScreen}
                 options={{ title: "Список накладных возврата" }}
-              />
-              <Stack.Screen
+              /> */}
+              {/* <Stack.Screen
                 name="EveryReturnScreen"
                 component={EveryReturnScreen}
-              />
-            </>
-
-            <>
-              {/* /////////////////////// Ревизия /////////////////////// */}
-              {/* ///////////////////////////////////////////////*/}
-              {/* <Stack.Screen
-                name="CheckTovarScreen"
-                component={CheckTovarScreen}
-                options={{ title: "Ревизия" }}
-                ////// выбор продавца и сипсок истории
-              />
-              <Stack.Screen
-                name="InvoiceCheckScreen"
-                component={InvoiceCheckScreen}
-                options={{ title: "Накладная для ревизии" }}
-              />
-              <Stack.Screen
-                name="RevisionRequestScreen"
-                component={RevisionRequestScreen}
-                options={{ title: "Список запросов на ревизию" }}
-                ////// список запрос0в других пр0давцов для подтверждения ревизии
-              />
-              <Stack.Screen
-                name="EveryRevisionRequestScreen"
-                component={EveryRevisionRequestScreen}
-                options={{ title: "" }}
-                ////// каждый запрос других пр0давцов для подтверждения ревизии
-              />
-              <Stack.Screen
-                name="ListCheckProdScreen"
-                component={ListCheckProdScreen}
-                options={{ title: "" }}
               /> */}
             </>
           </>

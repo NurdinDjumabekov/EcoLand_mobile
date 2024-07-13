@@ -25,7 +25,11 @@ export const AddBonusScreen = ({ navigation, route }) => {
 
   const sendData = () => {
     if (+obj?.bonuse < +bonuse) {
-      Alert.alert("Введённая вами сумма больше доступного вам количества");
+      Alert.alert("Введённая вами сумма больше доступной вам суммы!");
+    } else if (bonuse == "") {
+      Alert.alert(
+        "Поле бонусов не должно быть пустым, если у клиента нет бонусов, то введите 0!"
+      );
     } else {
       const { invoice_guid, user_guid } = obj;
       dispatch(saleDiscountFN({ bonuse, user_guid })); ///// state для бонусов

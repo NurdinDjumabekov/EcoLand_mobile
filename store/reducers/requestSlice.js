@@ -12,6 +12,8 @@ import {
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { changeLocalData } from "./saveDataSlice";
+
+////// helpers
 import { getLocalDataUser } from "../../helpers/returnDataUser";
 import { upsText } from "../../helpers/Data";
 
@@ -400,10 +402,8 @@ export const getActionsLeftovers = createAsyncThunk(
   async function (props, { dispatch, rejectWithValue }) {
     const { seller_guid, agent_guid } = props;
     try {
-      const response = await axios({
-        method: "GET",
-        url: `${API}/tt/get_report_leftovers?seller_guid=${seller_guid}&agent_guid=${agent_guid}`,
-      });
+      const url = `${API}/tt/get_report_leftovers?seller_guid=${seller_guid}&agent_guid=${agent_guid}`;
+      const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
         // console.log(response?.data);
         return response?.data;
@@ -421,7 +421,6 @@ export const createInvoiceTT = createAsyncThunk(
   "createInvoiceTT",
   /// (открытие кассы) создание накладной торговый точкой на целый день
   async function (seller_guid, { dispatch, rejectWithValue }) {
-    console.log(`${API}/tt/create_invoice`);
     try {
       const response = await axios({
         method: "POST",
@@ -618,7 +617,7 @@ export const getListSoldProd = createAsyncThunk(
       const url = `${API}/tt/get_point_invoice_product?invoice_guid=${guidInvoice}`;
       const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
-        return response?.data?.[0]?.list || [];
+        return response?.data?.[0]?.list;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -820,17 +819,13 @@ export const getAcceptProdInvoiceRetrn = createAsyncThunk(
 /// getMyEveryInvoiceReturn
 export const getMyEveryInvoiceReturn = createAsyncThunk(
   "getMyEveryInvoiceReturn",
-  /// для получения каждой накладной возврата
+  /// для получения каждой накладной со списком товаров для возарата товара
   async function (guid, { dispatch, rejectWithValue }) {
     try {
-      const response = await axios({
-        method: "GET",
-        url: `${API}/tt/get_invoice_return_product?invoice_guid=${guid}`,
-      });
+      const url = `${API}/tt/get_point_invoice_product?invoice_guid=${guid}`;
+      const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
-        const data = response?.data?.[0];
-        dispatch(changeAcceptInvoiceTT({ invoice_guid: data?.guid }));
-        return data;
+        return response?.data?.[0]?.list;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -1326,7 +1321,7 @@ const initialState = {
   /////// return ///////
   listProdReturn: [], //// список сопутки
   listMyInvoiceReturn: [], ///// список накладных для возврата
-  everyInvoiceReturn: {}, //// каждая накладная возврата
+  everyInvoiceReturn: [], //// каждая накладная возврата
   listAcceptReturnProd: [], /// список продуктов накладных , возврата ТT (история)
   listAcceptInvoiceReturn: [], /// список накладных возврата ТT (история)
 
@@ -1970,7 +1965,11 @@ const requestSlice = createSlice({
     //// getMyEveryInvoiceReturn
     builder.addCase(getMyEveryInvoiceReturn.fulfilled, (state, action) => {
       state.preloader = false;
-      state.everyInvoiceReturn = action.payload;
+      const newListProd = action.payload?.map((product) => ({
+        ...product,
+        returnProd: product?.count,
+      }));
+      state.everyInvoiceReturn = newListProd;
     });
     builder.addCase(getMyEveryInvoiceReturn.rejected, (state, action) => {
       state.error = action.payload;
@@ -2175,6 +2174,10 @@ const requestSlice = createSlice({
     clearListProdSearch: (state, action) => {
       state.listProdSearch = [];
     },
+
+    changeEveryInvoiceReturn: (state, action) => {
+      state.listProdSearch = action.payload;
+    },
   },
 });
 
@@ -2189,6 +2192,7 @@ export const {
   changeListActionLeftovers,
   clearListAgents,
   clearListProdSearch,
+  changeEveryInvoiceReturn,
 } = requestSlice.actions;
 
 export default requestSlice.reducer;

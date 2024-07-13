@@ -25,12 +25,7 @@ const styles = StyleSheet.create({
     minWidth: "90%",
   },
 
-  title: {
-    fontSize: 17,
-    fontWeight: "500",
-    marginBottom: 10,
-    maxWidth: "85%",
-  },
+  title: { fontSize: 17, fontWeight: "500", marginBottom: 10, maxWidth: "85%" },
 
   addDataBlock: {
     width: "95%",
@@ -51,15 +46,12 @@ const styles = StyleSheet.create({
     paddingLeft: 2,
   },
 
-  inputBlock: {
-    width: "48%",
-    minWidth: "48%",
-  },
+  inputBlock: { width: "48%", minWidth: "48%" },
 
   input: {
     paddingLeft: 10,
     paddingRight: 10,
-    height: 40,
+    height: 42,
     borderRadius: 5,
     borderColor: "rgb(217 223 232)",
     borderRadius: 8,
@@ -78,6 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "rgba(97 ,100, 239,0.7)",
     width: "45%",
+    marginBottom: 0,
   },
 
   //////////////////// krestik

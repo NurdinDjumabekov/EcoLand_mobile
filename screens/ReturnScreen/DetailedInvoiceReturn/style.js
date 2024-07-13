@@ -1,9 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
+  main: { flex: 1 },
 
   container: {
     flex: 1,
@@ -15,28 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
 
-  parent: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 5,
-    gap: 4,
-    paddingHorizontal: 10,
-  },
-
-  titleDate: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#222",
-    paddingVertical: 8,
-  },
-
-  total: {
-    borderTopColor: "#222",
-    borderTopWidth: 1,
-    paddingTop: 8,
-  },
+  total: { borderTopColor: "#222", borderTopWidth: 1, paddingTop: 8 },
 
   totalItemCount: {
     fontSize: 18,
@@ -54,22 +31,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  acceptBtn: {
+  sendReturnProd: {
     backgroundColor: "rgba(12, 169, 70, 0.9)",
     color: "#fff",
-    width: "47%",
+    width: "96%",
     alignSelf: "center",
-    fontSize: 14,
-    paddingHorizontal: 8,
-  },
-
-  rejectBtn: {
-    backgroundColor: "red",
-    color: "#fff",
-    width: "47%",
-    alignSelf: "center",
-    fontSize: 14,
-    paddingHorizontal: 8,
+    fontSize: 17,
+    paddingHorizontal: 12,
+    borderRadius: 8,
   },
 });
 

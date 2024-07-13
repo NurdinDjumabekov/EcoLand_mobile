@@ -68,7 +68,6 @@ const isCodeInCenter = (boundingBox) => {
 export const ScannerSaleScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -94,11 +93,11 @@ export const ScannerSaleScreen = ({ navigation }) => {
     }
   };
 
-  if (!permission) {
+  if (!hasPermission) {
     return <View />;
   }
 
-  if (!permission.granted || hasPermission === null) {
+  if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: "center" }}>
@@ -110,7 +109,7 @@ export const ScannerSaleScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Camera
+      <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : showResultModal}
         style={StyleSheet.absoluteFillObject}
       >
@@ -127,7 +126,7 @@ export const ScannerSaleScreen = ({ navigation }) => {
           useNativeDriver={false}
           edgeBorderWidth={5}
         />
-      </Camera>
+      </BarCodeScanner>
     </View>
   );
 };

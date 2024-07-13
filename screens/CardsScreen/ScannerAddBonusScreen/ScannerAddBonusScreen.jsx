@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, Vibration } from "react-native";
 //////// components
 import { Camera } from "expo-camera";
 import BarcodeMask from "react-native-barcode-mask";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 //////// hooks
 import { useDispatch } from "react-redux";
@@ -20,7 +21,6 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
 
   const { invoice_guid } = route.params;
 
-  const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -29,8 +29,6 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
-
-    // navigation.setOptions({ title: `asdas` });
   }, []);
 
   const showResultModal = async ({ data }) => {
@@ -43,11 +41,11 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
     }
   };
 
-  if (!permission) {
+  if (!hasPermission) {
     return <View />;
   }
 
-  if (!permission.granted || hasPermission === null) {
+  if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: "center" }}>
@@ -59,7 +57,7 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Camera
+      <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : showResultModal}
         style={StyleSheet.absoluteFillObject}
       >
@@ -76,7 +74,7 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
           useNativeDriver={false}
           edgeBorderWidth={5}
         />
-      </Camera>
+      </BarCodeScanner>
     </View>
   );
 };

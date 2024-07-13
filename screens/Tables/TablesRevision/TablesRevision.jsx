@@ -6,18 +6,19 @@ import { FlatList, TouchableOpacity } from "react-native";
 import { Text, View } from "react-native";
 
 /////// components
-import RevisionChangeCount from "../../../components/CheckProd/RevisionChangeCount/RevisionChangeCount";
+import RevisionChangeCount from "../../../components/Return/RevisionChangeCount/RevisionChangeCount";
 
 ////style
 import styles from "./style";
 
-export const TablesRevision = ({ arr }) => {
+export const TablesRevision = ({ list }) => {
   const [objTemporary, setObjTemporary] = useState({});
 
   const inputRef = useRef(null);
 
-  const addTenporaryData = (data) => {
-    setObjTemporary(data);
+  const addTenporaryData = (item) => {
+    setObjTemporary(item);
+
     setTimeout(() => {
       inputRef?.current?.focus();
     }, 1000);
@@ -28,26 +29,24 @@ export const TablesRevision = ({ arr }) => {
       <View style={styles.parentFlatList}>
         <View style={[styles.mainBlock, styles.more]}>
           <Text style={[styles.name, styles.moreText]}>Товар</Text>
-          <Text style={[styles.price, styles.moreText]}>Цена</Text>
-          <Text style={[styles.count, styles.moreText]}>Вналичии</Text>
-          <Text style={[styles.count, styles.moreText]}>Возврат</Text>
+          <Text style={[styles.price, styles.moreText]}>Цена за 1шт</Text>
+          <Text style={[styles.count, styles.moreText]}>Проданное кол-во</Text>
+          <Text style={[styles.count, styles.moreText]}>Возврат (кол-во)</Text>
         </View>
         <FlatList
-          data={arr}
+          data={list}
           renderItem={({ item, index }) => (
             <View style={styles.mainBlock}>
               <Text style={styles.name}>
                 {index + 1}. {item?.product_name}
               </Text>
               <Text style={styles.price}>{item?.price}</Text>
-              <Text style={styles.count}>{item?.end_outcome}</Text>
+              <Text style={styles.count}>{item?.count}</Text>
               <TouchableOpacity
                 style={styles.countReturn}
                 onPress={() => addTenporaryData(item)}
               >
-                <Text style={styles.countReturnText}>
-                  {item?.change_end_outcome}
-                </Text>
+                <Text style={styles.countReturnText}>{item?.returnProd}</Text>
               </TouchableOpacity>
             </View>
           )}

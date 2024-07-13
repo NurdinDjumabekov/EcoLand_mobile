@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 ////// tags
-import { Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView, FlatList, RefreshControl } from "react-native";
 
 ////// components
-import { EveryMyInvoice } from "../../../components/MainInvoiceProd/EveryMyInvoice/EveryMyInvoice";
+import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryInvoice";
 
 ////// fns
-import { getMyReturnInvoice } from "../../../store/reducers/requestSlice";
+import { getListSoldInvoice } from "../../../store/reducers/requestSlice";
 
 ////style
 import styles from "./style";
@@ -18,34 +18,30 @@ import styles from "./style";
 export const MyReturnsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const { preloader, listMyInvoiceReturn } = useSelector(
+  const { preloader, listSoldInvoice } = useSelector(
     (state) => state.requestSlice
   );
+
   const { data } = useSelector((state) => state.saveDataSlice);
 
-  const getData = () => dispatch(getMyReturnInvoice(data?.seller_guid));
+  const getData = () => dispatch(getListSoldInvoice(data?.seller_guid));
 
-  useEffect(() => getData(), []);
-
-  const getHistory = () => navigation.navigate("AcceptReturnHistoryScreen");
-
-  const screns = ["DetailedInvoiceReturn", "EveryReturnScreen"];
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <SafeAreaView>
-      <TouchableOpacity onPress={getHistory} style={styles.arrow}>
-        <Text style={styles.textBtn}>Список накладных для воврата</Text>
-        <View style={styles.arrowInner}></View>
-      </TouchableOpacity>
       <View style={styles.parentBlock}>
         <FlatList
           contentContainerStyle={styles.widthMax}
-          data={listMyInvoiceReturn}
-          renderItem={({ item }) => (
-            <EveryMyInvoice
-              obj={item}
+          data={listSoldInvoice}
+          renderItem={({ item, index }) => (
+            <AllHistoryInvoice
+              item={item}
+              index={index}
+              keyLink={"DetailedInvoiceReturn"}
               navigation={navigation}
-              screns={screns}
             />
           )}
           keyExtractor={(item, index) => `${item.guid}${index}`}

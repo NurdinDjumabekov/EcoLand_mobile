@@ -37,7 +37,7 @@ export const SoldProductScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [invoice_guid]);
 
   const del = (product_guid) => {
     dispatch(deleteSoldProd({ product_guid, getData }));
@@ -46,7 +46,9 @@ export const SoldProductScreen = ({ route, navigation }) => {
 
   const endSale = () => {
     ///// отправка накладной с продуктами (полная продажа)
-    dispatch(endSaleProds({ invoice_guid, navigation, ...saleDiscount }));
+
+    console.log({ invoice_guid, navigation, ...saleDiscount });
+    dispatch(endSaleProds({ invoice_guid, ...saleDiscount }));
     setModal(false);
   };
 

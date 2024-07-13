@@ -7,34 +7,44 @@ import { ViewButton } from "../../../customsTags/ViewButton";
 import { useDispatch, useSelector } from "react-redux";
 
 ///// fns
-import { changeListActionLeftovers } from "../../../store/reducers/requestSlice";
+import { changeEveryInvoiceReturn } from "../../../store/reducers/requestSlice";
 
 ////style
 import styles from "./style";
 
-const RevisionChangeCount = ({ objTemporary, setObjTemporary, inputRef }) => {
+const RevisionChangeCount = (props) => {
+  const { objTemporary, setObjTemporary, inputRef } = props;
+
+  console.log(objTemporary, "objTemporary");
+
   const dispatch = useDispatch();
 
-  const { listActionLeftovers } = useSelector((state) => state.requestSlice);
+  const { everyInvoiceReturn } = useSelector((state) => state.requestSlice);
 
   const onClose = () => setObjTemporary({});
 
   const changeCount = () => {
-    const guidProd = objTemporary?.change_end_outcome;
-    const products = listActionLeftovers?.map((i) => ({
-      ...i,
-      change_end_outcome:
-        i?.guid == objTemporary?.guid ? +guidProd : +i?.change_end_outcome,
-    }));
+    const newCountProd = objTemporary?.returnProd;
 
-    dispatch(changeListActionLeftovers(products));
-    ///// для ревизии накладной с продуктами
+    const products = everyInvoiceReturn?.map((i) => {
+      return {
+        ...i,
+        returnProd:
+          i?.guid == objTemporary?.guid ? newCountProd : i?.returnProd,
+      };
+    });
+
+    // console.log(products, "products");
+    // console.log(objTemporary, "objTemporary");
+
+    dispatch(changeEveryInvoiceReturn(products));
+    ///// для возврата товара
     onClose();
   };
 
   const onChange = (text) => {
     if (/^\d*\.?\d*$/.test(text)) {
-      setObjTemporary({ ...objTemporary, change_end_outcome: text });
+      setObjTemporary({ ...objTemporary, returnProd: text });
     }
   };
 
@@ -42,7 +52,7 @@ const RevisionChangeCount = ({ objTemporary, setObjTemporary, inputRef }) => {
     <Modal
       animationType="fade"
       transparent={true}
-      visible={!!objTemporary?.guid}
+      visible={!!objTemporary?.product_guid}
       onRequestClose={onClose}
     >
       <TouchableWithoutFeedback onPress={onClose}>
@@ -64,7 +74,7 @@ const RevisionChangeCount = ({ objTemporary, setObjTemporary, inputRef }) => {
                 </Text>
                 <TextInput
                   style={styles.input}
-                  value={objTemporary?.change_end_outcome?.toString()}
+                  value={objTemporary?.returnProd?.toString()}
                   onChangeText={(text) => onChange(text)}
                   keyboardType="numeric"
                   maxLength={8}

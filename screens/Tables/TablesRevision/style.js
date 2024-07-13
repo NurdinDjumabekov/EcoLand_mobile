@@ -1,9 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  parentFlatList: {
-    maxHeight: "80%",
-  },
+  parentFlatList: { maxHeight: "80%" },
 
   mainBlock: {
     paddingVertical: 10,
@@ -16,23 +14,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-  more: {
-    paddingVertical: 20,
-    backgroundColor: "rgba(212, 223, 238, 0.47)",
-  },
+  more: { paddingVertical: 20, backgroundColor: "rgba(212, 223, 238, 0.47)" },
 
-  moreText: {
-    fontWeight: "600",
-    color: "#000",
-    fontSize: 14,
-  },
+  moreText: { fontWeight: "600", color: "#000", fontSize: 12 },
 
   name: {
     fontSize: 13,
     fontWeight: "400",
     color: "#222",
     width: "45%",
-    // backgroundColor: "blue",
     paddingRight: 15,
   },
 
@@ -40,8 +30,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "400",
     color: "#222",
-    width: "13%",
-    // backgroundColor: "yellow",
+    width: "15%",
     paddingRight: 10,
     color: "green",
   },
@@ -50,9 +39,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "400",
     color: "#222",
-    width: "19%",
+    width: "20%",
     color: "green",
-    // backgroundColor: "red",
   },
 
   countReturn: {
@@ -61,20 +49,12 @@ const styles = StyleSheet.create({
     borderColor: "rgba(47, 71, 190, 0.287)",
     paddingVertical: 5,
     paddingHorizontal: 3,
-    // paddingTop: 5,
     borderRadius: 5,
-    // backgroundColor: "red",
   },
 
-  countReturnText: {
-    fontSize: 13,
-    fontWeight: "400",
-    color: "red",
-  },
+  countReturnText: { fontSize: 13, fontWeight: "400", color: "red" },
 
-  input: {
-    width: "18%",
-  },
+  input: { width: "18%" },
 });
 
 export default styles;

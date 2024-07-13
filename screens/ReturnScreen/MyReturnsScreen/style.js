@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    paddingBottom: 110,
+    paddingBottom: 30,
+    paddingTop: 5,
   },
 
   arrow: {
@@ -33,16 +34,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 
-  textBtn: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#fff",
-  },
+  textBtn: { fontSize: 18, fontWeight: "500", color: "#fff" },
 
-  widthMax: {
-    minWidth: "100%",
-    width: "100%",
-  },
+  widthMax: { minWidth: "100%", width: "100%" },
 });
 
 export default styles;
