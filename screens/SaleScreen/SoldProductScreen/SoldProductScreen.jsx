@@ -46,8 +46,6 @@ export const SoldProductScreen = ({ route, navigation }) => {
 
   const endSale = () => {
     ///// отправка накладной с продуктами (полная продажа)
-
-    console.log({ invoice_guid, navigation, ...saleDiscount });
     dispatch(endSaleProds({ invoice_guid, ...saleDiscount }));
     setModal(false);
   };
@@ -56,11 +54,11 @@ export const SoldProductScreen = ({ route, navigation }) => {
     navigation.navigate("ScannerAddBonusScreen", { invoice_guid });
   };
 
-  const sumProds = formatCount(sumSaleProds(listSoldProd));
+  const sumProds = formatCount(sumSaleProds(listSoldProd?.list));
   const bonus = formatCount(+saleDiscount?.bonuse);
   const result = +sumProds - +bonus;
 
-  if (listSoldProd?.length === 0) {
+  if (!listSoldProd?.list) {
     return <Text style={styles.noneData}>Список пустой</Text>;
   }
 
@@ -70,7 +68,7 @@ export const SoldProductScreen = ({ route, navigation }) => {
         <View style={styles.soldBlock}>
           <FlatList
             contentContainerStyle={styles.flatList}
-            data={listSoldProd}
+            data={listSoldProd?.list}
             renderItem={({ item, index }) => (
               <View style={styles.container}>
                 <View style={styles.parentBlock}>
@@ -110,15 +108,19 @@ export const SoldProductScreen = ({ route, navigation }) => {
             }
           />
         </View>
+
         <View style={styles.actionBlock}>
           <Text style={styles.result}>Сумма товара: {sumProds} сом</Text>
-          <Text style={styles.resultDiscount}>Бонусы: {bonus} сом</Text>
-          <Text style={styles.resultAll}>Итого к оплате: {result} сом</Text>
+          <Text style={styles.resultDiscount}>Бонусы: {bonus || 0} сом</Text>
+          <Text style={styles.resultAll}>
+            Итого к оплате: {result || 0} сом
+          </Text>
 
           <View style={styles.actionBlockInner}>
             <ViewButton styles={styles.addCard} onclick={navCard}>
               Бонусная карта
             </ViewButton>
+
             <ViewButton
               styles={styles.endSaleBtn}
               onclick={() => setModal(true)}

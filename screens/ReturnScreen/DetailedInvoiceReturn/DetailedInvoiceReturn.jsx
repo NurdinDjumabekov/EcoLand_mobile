@@ -32,25 +32,27 @@ export const DetailedInvoiceReturn = ({ route, navigation }) => {
 
   const { everyInvoiceReturn } = useSelector((state) => state.requestSlice);
   const { acceptConfirmInvoice } = useSelector((state) => state.stateSlice);
+  //// delete
   const { data } = useSelector((state) => state.saveDataSlice);
 
   const acceptInvoiceFN = () => {
-    ///// для принятия накладной торговой токой
-    const send = { ...acceptConfirmInvoice, status: 2 };
+    ///// для принятия накладной торговой точкой
     const obj = { seller_guid: data?.seller_guid };
-    dispatch(acceptInvoiceReturn({ props: { ...send, ...obj }, navigation }));
+
+    const sendData = { ...obj, listReturn: everyInvoiceReturn, navigation };
+    dispatch(acceptInvoiceReturn(sendData));
     setAcceptOk(false);
   };
 
   const getData = () => dispatch(getMyEveryInvoiceReturn(guidInvoice));
 
   useEffect(() => {
-    getData();
-
     navigation.setOptions({ title: everyInvoiceReturn?.[0]?.date });
-  }, [guidInvoice]);
+  }, [everyInvoiceReturn]);
 
-  console.log(everyInvoiceReturn, "everyInvoiceReturn");
+  useEffect(() => {
+    getData();
+  }, [guidInvoice]);
 
   return (
     <View style={styles.main}>
@@ -68,7 +70,7 @@ export const DetailedInvoiceReturn = ({ route, navigation }) => {
       </View>
       <ConfirmationModal
         visible={acceptOk}
-        message="Принять накладную ?"
+        message="Оформить возврат ?"
         onYes={acceptInvoiceFN}
         onNo={() => setAcceptOk(false)}
         onClose={() => setAcceptOk(false)}

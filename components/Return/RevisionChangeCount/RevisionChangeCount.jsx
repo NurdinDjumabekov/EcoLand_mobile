@@ -1,5 +1,5 @@
 ///// tags
-import { Text, View, TextInput, Modal } from "react-native";
+import { Text, View, TextInput, Modal, Alert } from "react-native";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { ViewButton } from "../../../customsTags/ViewButton";
 
@@ -15,8 +15,6 @@ import styles from "./style";
 const RevisionChangeCount = (props) => {
   const { objTemporary, setObjTemporary, inputRef } = props;
 
-  console.log(objTemporary, "objTemporary");
-
   const dispatch = useDispatch();
 
   const { everyInvoiceReturn } = useSelector((state) => state.requestSlice);
@@ -24,21 +22,25 @@ const RevisionChangeCount = (props) => {
   const onClose = () => setObjTemporary({});
 
   const changeCount = () => {
-    const newCountProd = objTemporary?.returnProd;
+    const newCountProd =
+      objTemporary?.returnProd === "" ? 0 : objTemporary?.returnProd;
 
-    const products = everyInvoiceReturn?.map((i) => {
-      return {
-        ...i,
-        returnProd:
-          i?.guid == objTemporary?.guid ? newCountProd : i?.returnProd,
-      };
-    });
+    const products = everyInvoiceReturn?.map((i) => ({
+      ...i,
+      returnProd: i?.guid === objTemporary?.guid ? newCountProd : i?.returnProd,
+    }));
 
-    // console.log(products, "products");
-    // console.log(objTemporary, "objTemporary");
+    for (let product of products) {
+      if (product.returnProd > product.count) {
+        Alert.alert(
+          "Ошибка количества",
+          `Количество возврата для товара "${product.product_name}" превышает проданное количество!`
+        );
+        return;
+      }
+    }
 
     dispatch(changeEveryInvoiceReturn(products));
-    ///// для возврата товара
     onClose();
   };
 

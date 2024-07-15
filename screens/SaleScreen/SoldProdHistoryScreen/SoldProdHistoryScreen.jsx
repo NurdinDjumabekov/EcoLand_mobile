@@ -28,8 +28,8 @@ export const SoldProdHistoryScreen = ({ navigation, route }) => {
   );
 
   useEffect(() => {
-    navigation.setOptions({ title: `${listSoldProd?.[0]?.date}` });
-  }, [listSoldProd?.[0]?.date]);
+    navigation.setOptions({ title: `${listSoldProd?.list?.[0]?.date}` });
+  }, [listSoldProd?.list?.[0]?.date]);
 
   const getData = () => dispatch(getListSoldProd(guidInvoice));
 
@@ -37,11 +37,13 @@ export const SoldProdHistoryScreen = ({ navigation, route }) => {
     getData();
   }, []);
 
+  console.log(listSoldProd?.user_bonuse);
+
   return (
     <View style={styles.container}>
       <View style={styles.historyParent}>
         <FlatList
-          data={listSoldProd}
+          data={listSoldProd?.list}
           renderItem={({ item, index }) => (
             <View style={styles.EveryInner}>
               <View style={styles.mainData}>
@@ -62,9 +64,14 @@ export const SoldProdHistoryScreen = ({ navigation, route }) => {
           }
         />
       </View>
-      <ResultCounts list={listSoldProd} />
+      <ResultCounts list={listSoldProd?.list} />
+      {!!listSoldProd?.user_bonuse && (
+        <Text style={styles.discount}>
+          Оплачено бонусами: {listSoldProd?.user_bonuse} сом
+        </Text>
+      )}
       <Text style={styles.totalItemSumm}>
-        Сумма: {sumSoputkaProds(listSoldProd)} сом
+        Сумма продажи: {sumSoputkaProds(listSoldProd?.list)} сом
       </Text>
     </View>
   );

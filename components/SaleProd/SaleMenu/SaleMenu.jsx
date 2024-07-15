@@ -56,7 +56,7 @@ const SaleMenu = ({ navigation }) => {
 
   const sendData = () => {
     if (obj?.qrcode?.length != 6) {
-      Alert.alert("Введите 6ти значный код товара");
+      Alert.alert("Введите код товара");
     } else {
       const sendData = { qrcode: obj?.qrcode, seller_guid: data?.seller_guid };
       dispatch(getEveryProd({ ...sendData, navigation, closeModal }));
@@ -92,9 +92,7 @@ const SaleMenu = ({ navigation }) => {
           onPress={closeModal} // Закрыть модальное окно
         >
           <View style={styles.modalInner}>
-            <Text style={styles.titleSelect}>
-              Введите 6ти значный код товара
-            </Text>
+            <Text style={styles.titleSelect}>Введите код товара</Text>
             <TextInput
               style={styles.input}
               value={obj?.qrcode?.toString()}

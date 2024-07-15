@@ -617,7 +617,7 @@ export const getListSoldProd = createAsyncThunk(
       const url = `${API}/tt/get_point_invoice_product?invoice_guid=${guidInvoice}`;
       const response = await axios(url);
       if (response.status >= 200 && response.status < 300) {
-        return response?.data?.[0]?.list;
+        return response?.data?.[0];
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -839,17 +839,21 @@ export const getMyEveryInvoiceReturn = createAsyncThunk(
 export const acceptInvoiceReturn = createAsyncThunk(
   "acceptInvoiceReturn",
   /// для принятия накладной возврата торговой точкой
-  async function ({ props, navigation }, { rejectWithValue }) {
-    const { status } = props;
+  async function (props, { rejectWithValue }) {
+    const { seller_guid, listReturn, navigation } = props;
+    console.log(listReturn, "listReturn");
+    const invoice_guid = listReturn?.[0]?.invoice_guid;
     try {
       const response = await axios({
         method: "POST",
         url: `${API}/tt/confirm_invoice_return`,
-        data: props,
+        data: { seller_guid, listReturn, invoice_guid },
       });
       if (response.status >= 200 && response.status < 300) {
-        navigation.navigate("AllCategScreen");
-        return status;
+        if (response.data.status == 1) {
+          navigation.navigate("AllCategScreen");
+        }
+        return response.data.status;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -1305,7 +1309,7 @@ const initialState = {
 
   /////////// sale //////////////
   listSoldInvoice: [], /// список накладных с проданными товарами
-  listSoldProd: [], /// список проданных товаров
+  listSoldProd: {}, /// список проданных товаров
   everyProdSale: [], /// список проданных товаров
 
   listProdSearch: [], /// храню данные поиска в продаже товара
@@ -1714,7 +1718,7 @@ const requestSlice = createSlice({
     builder.addCase(getListSoldProd.rejected, (state, action) => {
       state.error = action.payload;
       state.preloader = false;
-      state.listSoldProd = [];
+      state.listSoldProd = {};
       Alert.alert(upsText);
     });
     builder.addCase(getListSoldProd.pending, (state, action) => {
@@ -1965,10 +1969,7 @@ const requestSlice = createSlice({
     //// getMyEveryInvoiceReturn
     builder.addCase(getMyEveryInvoiceReturn.fulfilled, (state, action) => {
       state.preloader = false;
-      const newListProd = action.payload?.map((product) => ({
-        ...product,
-        returnProd: product?.count,
-      }));
+      const newListProd = action.payload?.map((i) => ({ ...i, returnProd: 0 }));
       state.everyInvoiceReturn = newListProd;
     });
     builder.addCase(getMyEveryInvoiceReturn.rejected, (state, action) => {
@@ -1982,15 +1983,17 @@ const requestSlice = createSlice({
     ///// acceptInvoiceReturn
     builder.addCase(acceptInvoiceReturn.fulfilled, (state, action) => {
       state.preloader = false;
-      if (action.payload == 2) {
-        Alert.alert("Накладная успешно принята!");
+      if (action.payload == 1) {
+        Alert.alert("Возврат успешно оформлен");
       } else {
-        Alert.alert("Накладная отклонена!");
+        Alert.alert("Не удалось оформить накладную для возврата");
       }
     });
     builder.addCase(acceptInvoiceReturn.rejected, (state, action) => {
       state.error = action.payload;
-      Alert.alert("Упс, что-то пошло не так!");
+      Alert.alert(
+        "Упс, что-то пошло не так! Не удалось оформить накладную для возврата"
+      );
       state.preloader = false;
     });
     builder.addCase(acceptInvoiceReturn.pending, (state, action) => {
@@ -2176,7 +2179,7 @@ const requestSlice = createSlice({
     },
 
     changeEveryInvoiceReturn: (state, action) => {
-      state.listProdSearch = action.payload;
+      state.everyInvoiceReturn = action.payload;
     },
   },
 });

@@ -129,6 +129,7 @@ export const Navigation = () => {
               <Stack.Screen
                 name="SoldProdHistoryScreen"
                 component={SoldProdHistoryScreen}
+                options={{ title: "" }}
                 ////// список проданных товаров каждой накладной
               />
             </>

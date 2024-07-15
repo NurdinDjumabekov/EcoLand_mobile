@@ -1,9 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
 
   historyParent: {
     minWidth: "100%",
@@ -63,11 +61,7 @@ const styles = StyleSheet.create({
     color: "rgba(47, 71, 190, 0.672)",
   },
 
-  title: {
-    fontSize: 16,
-    fontWeight: "400",
-    marginTop: 5,
-  },
+  title: { fontSize: 16, fontWeight: "400", marginTop: 5 },
 
   actions: {
     display: "flex",
@@ -89,31 +83,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  discount: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "rgba(227, 16, 51, 0.9)",
+    paddingHorizontal: 10,
+  },
+
   totalItemSumm: {
     fontSize: 18,
     fontWeight: "500",
     color: "rgba(47, 71, 190, 0.991)",
     paddingHorizontal: 10,
   },
-
-  //////////////////// krestik
-  krest: {
-    width: 22,
-    height: 22,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 15,
-  },
-
-  line: {
-    position: "absolute",
-    width: "100%",
-    height: 2,
-    backgroundColor: "red",
-  },
-
-  deg: { transform: [{ rotate: "45deg" }] },
-  degMinus: { transform: [{ rotate: "-45deg" }] },
 });
 
 export default styles;

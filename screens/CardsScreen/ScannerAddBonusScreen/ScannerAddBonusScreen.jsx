@@ -37,7 +37,8 @@ export const ScannerAddBonusScreen = ({ navigation, route }) => {
 
       Vibration.vibrate();
       dispatch(getBonusCard({ navigation, card_bonus: data, invoice_guid }));
-      ////// получаю даанные бонусной карты
+
+      ////// получаю данные бонусной карты
     }
   };
 

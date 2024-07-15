@@ -29,9 +29,9 @@ export const TablesRevision = ({ list }) => {
       <View style={styles.parentFlatList}>
         <View style={[styles.mainBlock, styles.more]}>
           <Text style={[styles.name, styles.moreText]}>Товар</Text>
-          <Text style={[styles.price, styles.moreText]}>Цена за 1шт</Text>
-          <Text style={[styles.count, styles.moreText]}>Проданное кол-во</Text>
-          <Text style={[styles.count, styles.moreText]}>Возврат (кол-во)</Text>
+          <Text style={[styles.price, styles.moreText]}>Цена</Text>
+          <Text style={[styles.count, styles.moreText]}>Продано</Text>
+          <Text style={[styles.count, styles.moreText]}>Возврат</Text>
         </View>
         <FlatList
           data={list}
@@ -40,7 +40,7 @@ export const TablesRevision = ({ list }) => {
               <Text style={styles.name}>
                 {index + 1}. {item?.product_name}
               </Text>
-              <Text style={styles.price}>{item?.price}</Text>
+              <Text style={styles.price}>{item?.sale_price}</Text>
               <Text style={styles.count}>{item?.count}</Text>
               <TouchableOpacity
                 style={styles.countReturn}
