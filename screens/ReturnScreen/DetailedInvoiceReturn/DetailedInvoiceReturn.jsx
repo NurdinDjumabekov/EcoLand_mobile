@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 ///components
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 import { ViewButton } from "../../../customsTags/ViewButton";
-import { MyTable } from "../../../common/MyTable/MyTable";
 import ResultCounts from "../../../common/ResultCounts/ResultCounts";
+import { TablesRevision } from "../../Tables/TablesRevision/TablesRevision";
 
 ///states
 import { getMyEveryInvoiceReturn } from "../../../store/reducers/requestSlice";
@@ -20,7 +20,6 @@ import { formatCount, sumSaleProds } from "../../../helpers/amounts";
 
 ////style
 import styles from "./style";
-import { TablesRevision } from "../../Tables/TablesRevision/TablesRevision";
 
 export const DetailedInvoiceReturn = ({ route, navigation }) => {
   const { guidInvoice } = route.params; ///// guid каждой накладной с проданными товарами
@@ -68,6 +67,7 @@ export const DetailedInvoiceReturn = ({ route, navigation }) => {
           </ViewButton>
         </View>
       </View>
+
       <ConfirmationModal
         visible={acceptOk}
         message="Оформить возврат ?"

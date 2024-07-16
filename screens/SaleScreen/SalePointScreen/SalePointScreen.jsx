@@ -19,7 +19,7 @@ import { EveryInvoiceSale } from "../../../components/SaleProd/EveryInvoiceSale/
 /////// style
 import styles from "./style";
 
-export const SalePointScreen = ({ navigation }) => {
+export const SalePointScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const { infoKassa } = useSelector((state) => state.requestSlice);
@@ -28,7 +28,11 @@ export const SalePointScreen = ({ navigation }) => {
   const getData = () => dispatch(createInvoiceTT(data?.seller_guid));
 
   useEffect(() => {
-    getData();
+    if (!route.params?.restart) {
+      //// true - я добавляю продукт в уже созданную накладную, где ранее уже были добавлены товары
+      //// false - накладная только что была создана и
+      getData();
+    }
     dispatch(clearTemporaryData()); // очищаю активный продукт
 
     return () => {

@@ -451,11 +451,14 @@ export const endSaleProds = createAsyncThunk(
         url: `${API}/tt/point_sale_confirm`,
         data: { invoice_guid, user_guid, bonuse },
       });
+
+      console.log(response, "response");
       if (response.status >= 200 && response.status < 300) {
-        if (response.data?.result == 1) {
+        const { result } = response.data;
+        if (result == 1) {
           navigation.navigate("AllCategScreen");
         }
-        return response.data.result;
+        return result;
       } else {
         throw Error(`Error: ${response.status}`);
       }
@@ -759,7 +762,7 @@ export const getMyReturnInvoice = createAsyncThunk(
     try {
       const response = await axios({
         method: "GET",
-        url: `${API}/tt/get_invoice_return?seller_guid=${seller_guid}&invoice_status=1`,
+        url: `${API}/tt/get_invoice_return?seller_guid=${seller_guid}`,
       });
       if (response.status >= 200 && response.status < 300) {
         return response?.data;
@@ -841,7 +844,6 @@ export const acceptInvoiceReturn = createAsyncThunk(
   /// для принятия накладной возврата торговой точкой
   async function (props, { rejectWithValue }) {
     const { seller_guid, listReturn, navigation } = props;
-    console.log(listReturn, "listReturn");
     const invoice_guid = listReturn?.[0]?.invoice_guid;
     try {
       const response = await axios({
@@ -849,6 +851,7 @@ export const acceptInvoiceReturn = createAsyncThunk(
         url: `${API}/tt/confirm_invoice_return`,
         data: { seller_guid, listReturn, invoice_guid },
       });
+
       if (response.status >= 200 && response.status < 300) {
         if (response.data.status == 1) {
           navigation.navigate("AllCategScreen");
@@ -1502,7 +1505,7 @@ const requestSlice = createSlice({
     });
     builder.addCase(endSaleProds.rejected, (state, action) => {
       state.error = action.payload;
-      Alert.alert("Упс, что-то пошло не так! Не удалось закрыть кассу");
+      Alert.alert("Упс, что-то пошло не так! Не удалось продать");
       state.preloader = false;
     });
     builder.addCase(endSaleProds.pending, (state, action) => {
@@ -2181,6 +2184,10 @@ const requestSlice = createSlice({
     changeEveryInvoiceReturn: (state, action) => {
       state.everyInvoiceReturn = action.payload;
     },
+
+    changeInfoKassaSale: (state, action) => {
+      state.infoKassa = action.payload;
+    },
   },
 });
 
@@ -2196,6 +2203,7 @@ export const {
   clearListAgents,
   clearListProdSearch,
   changeEveryInvoiceReturn,
+  changeInfoKassaSale,
 } = requestSlice.actions;
 
 export default requestSlice.reducer;

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   historyParent: {
     minWidth: "100%",
     width: "100%",
-    paddingBottom: 20,
+    paddingBottom: 0,
     borderTopWidth: 1,
     borderColor: "rgba(47, 71, 190, 0.587)",
     maxHeight: "83%",
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
   more: { maxHeight: "88%" },
 
-  EveryInner: {
+  everyInner: {
     backgroundColor: "rgba(162, 178, 238, 0.102)",
     minWidth: "100%",
     padding: 8,
@@ -63,26 +63,6 @@ const styles = StyleSheet.create({
 
   title: { fontSize: 16, fontWeight: "400", marginTop: 5 },
 
-  actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 8,
-  },
-
-  sendBtn: {
-    backgroundColor: "#fff",
-    color: "#fff",
-    width: "48%",
-    borderRadius: 10,
-    fontWeight: 600,
-    backgroundColor: "rgba(12, 169, 70, 0.9)",
-    borderWidth: 1,
-    borderColor: "rgb(217 223 232)",
-    alignSelf: "center",
-    fontSize: 16,
-  },
-
   discount: {
     fontSize: 18,
     fontWeight: "500",
@@ -95,6 +75,41 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "rgba(47, 71, 190, 0.991)",
     paddingHorizontal: 10,
+  },
+
+  actionBlock: {
+    position: "absolute",
+    bottom: 40,
+    paddingVertical: 10,
+    alignSelf: "center",
+    borderTopColor: "rgba(47, 71, 190, 0.691)",
+    borderTopWidth: 1,
+    minWidth: "100%",
+  },
+
+  actionBlockInner: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+
+  endSaleBtn: {
+    backgroundColor: "rgba(12, 169, 70, 0.9)",
+    color: "#fff",
+    width: "48%",
+    fontSize: 14,
+    marginHorizontal: 0,
+  },
+
+  addCard: {
+    backgroundColor: "rgba(47, 71, 190, 0.691)",
+    color: "#fff",
+    width: "48%",
+    fontSize: 14,
+    marginHorizontal: 0,
   },
 });
 

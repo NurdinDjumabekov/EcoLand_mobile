@@ -99,7 +99,7 @@ const SaleMenu = ({ navigation }) => {
               onChangeText={onChange}
               placeholder="763546"
               keyboardType="numeric"
-              maxLength={6}
+              maxLength={25}
               ref={refInput}
             />
             <ViewButton styles={styles.sendBtn} onclick={sendData}>

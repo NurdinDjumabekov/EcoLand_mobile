@@ -28,7 +28,7 @@ const EverySaleProdScreen = ({ route, navigation }) => {
 
   const onChange = (text) => {
     if (/^\d*\.?\d*$/.test(text)) {
-      // Проверяем, не является ли точка первым символом
+      // Проверяем, не является ли точка или запятая первым символом
       if (text === "." || text?.indexOf(".") === 0) {
         return;
       }
@@ -47,20 +47,26 @@ const EverySaleProdScreen = ({ route, navigation }) => {
     /////// получаю каждый прожуке для продажи
   }, []);
 
-  const confText = `Недостаточное количество товара, у вас остаток ${everyProdSale?.end_outcome} ${everyProdSale?.unit}`;
+  const check_unit = everyProdSale?.unit_codeid == 1;
+  const { sale_price_discount } = everyProdSale;
 
-  const typeProd = `Введите ${
-    everyProdSale?.unit_codeid == 1 ? "количество" : "вес"
-  }`;
+  const typeProd = `Введите ${check_unit ? "количество" : "вес"}`;
 
   const addInInvoice = () => {
     if (sum == "" || sum == 0) {
       Alert.alert(typeProd);
     } else {
       const { price, sale_price, count_type } = everyProdSale;
-      const sendData = { guid: obj?.guid, count: sum, sale_price };
-      const data = { invoice_guid: infoKassa?.guid, price, ...sendData };
-      dispatch(addProductInvoiceTT({ data, navigation, count_type }));
+
+      if (!!sale_price_discount) {
+        const sendData = { guid: obj?.guid, count: sum, sale_price_discount };
+        const data = { invoice_guid: infoKassa?.guid, price, ...sendData };
+        dispatch(addProductInvoiceTT({ data, navigation, count_type }));
+      } else {
+        const sendData = { guid: obj?.guid, count: sum, sale_price };
+        const data = { invoice_guid: infoKassa?.guid, price, ...sendData };
+        dispatch(addProductInvoiceTT({ data, navigation, count_type }));
+      }
       ///// продаю товар
     }
   };
@@ -68,9 +74,7 @@ const EverySaleProdScreen = ({ route, navigation }) => {
   const onClose = () => navigation.goBack();
 
   const typeVes = {
-    1: `Введите ${
-      everyProdSale?.unit_codeid == 1 ? "итоговое количество" : "итоговый вес"
-    } товара`,
+    1: `Введите ${check_unit ? "итоговое количество" : "итоговый вес"} товара`,
     2: "Введите итоговую сумму товара",
   };
 
@@ -89,12 +93,20 @@ const EverySaleProdScreen = ({ route, navigation }) => {
           <Text style={styles.inputTitle}>
             Цена продажи {everyProdSale?.unit && `за ${everyProdSale?.unit}`}
           </Text>
-          <TextInput
-            style={styles.input}
-            value={`${everyProdSale?.sale_price?.toString()} сом`}
-            keyboardType="numeric"
-            maxLength={8}
-          />
+          <View style={styles.inputPrice}>
+            {!!sale_price_discount ? (
+              <>
+                <Text style={styles.priceNone}>
+                  {everyProdSale?.sale_price} сом
+                </Text>
+                <Text style={styles.priceDiscount}>
+                  {sale_price_discount || 0} сом
+                </Text>
+              </>
+            ) : (
+              <Text style={styles.price}>{everyProdSale?.sale_price} сом</Text>
+            )}
+          </View>
         </View>
         <View style={styles.inputBlock}>
           <Text style={styles.inputTitle}>

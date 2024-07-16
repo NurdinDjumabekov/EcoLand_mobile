@@ -43,8 +43,42 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 5,
     borderColor: "rgb(217 223 232)",
-    borderRadius: 8,
     backgroundColor: "#fff",
+  },
+
+  inputPrice: {
+    paddingHorizontal: 10,
+    height: 42,
+    width: "100%",
+    borderRadius: 5,
+    borderColor: "rgb(217 223 232)",
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  price: {
+    fontSize: 14,
+    fontWeight: "400",
+    lineHeight: 15,
+    color: "#222",
+  },
+
+  priceNone: {
+    fontSize: 14,
+    fontWeight: "400",
+    lineHeight: 15,
+    color: "red",
+    textDecorationLine: "line-through",
+  },
+
+  priceDiscount: {
+    fontSize: 14,
+    fontWeight: "400",
+    lineHeight: 15,
+    color: "green",
+    marginLeft: 10,
   },
 
   btnAdd: {

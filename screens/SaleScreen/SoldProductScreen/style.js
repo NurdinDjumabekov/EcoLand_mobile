@@ -114,15 +114,17 @@ const styles = StyleSheet.create({
   endSaleBtn: {
     backgroundColor: "rgba(12, 169, 70, 0.9)",
     color: "#fff",
-    width: "47%",
+    width: "48%",
     fontSize: 15,
+    marginHorizontal: 0,
   },
 
   addCard: {
     backgroundColor: "rgba(47, 71, 190, 0.691)",
     color: "#fff",
-    width: "47%",
+    width: "48%",
     fontSize: 16,
+    marginHorizontal: 0,
   },
 
   //////////////////// krestik

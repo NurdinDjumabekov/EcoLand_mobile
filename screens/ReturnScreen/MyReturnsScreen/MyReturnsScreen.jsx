@@ -10,7 +10,7 @@ import { SafeAreaView, FlatList, RefreshControl } from "react-native";
 import { AllHistoryInvoice } from "../../../common/AllHistoryInvoice/AllHistoryInvoice";
 
 ////// fns
-import { getListSoldInvoice } from "../../../store/reducers/requestSlice";
+import { getMyReturnInvoice } from "../../../store/reducers/requestSlice";
 
 ////style
 import styles from "./style";
@@ -18,24 +18,26 @@ import styles from "./style";
 export const MyReturnsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const { preloader, listSoldInvoice } = useSelector(
+  const { preloader, listMyInvoiceReturn } = useSelector(
     (state) => state.requestSlice
   );
 
   const { data } = useSelector((state) => state.saveDataSlice);
 
-  const getData = () => dispatch(getListSoldInvoice(data?.seller_guid));
+  const getData = () => dispatch(getMyReturnInvoice(data?.seller_guid));
 
   useEffect(() => {
     getData();
   }, []);
+
+  // console.log(listMyInvoiceReturn, "listMyInvoiceReturn");
 
   return (
     <SafeAreaView>
       <View style={styles.parentBlock}>
         <FlatList
           contentContainerStyle={styles.widthMax}
-          data={listSoldInvoice}
+          data={listMyInvoiceReturn}
           renderItem={({ item, index }) => (
             <AllHistoryInvoice
               item={item}

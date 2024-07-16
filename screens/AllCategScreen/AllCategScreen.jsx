@@ -1,5 +1,5 @@
 ///// tags
-import { View, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView, FlatList, RefreshControl } from "react-native";
 import { ViewContainer } from "../../customsTags/ViewContainer";
 
@@ -39,22 +39,10 @@ export const AllCategScreen = ({ navigation }) => {
     }, [])
   );
 
-  const goPage = () => navigation.navigate("HistoryBalance");
-
   return (
     <ViewContainer>
       <SafeAreaView>
         <View style={styles.parentBlock}>
-          <TouchableOpacity style={styles.balance} onPress={goPage}>
-            <View>
-              <View style={styles.balanceInner}>
-                <Text style={styles.balanceText}>Баланс</Text>
-                <View style={styles.arrow}></View>
-              </View>
-              <Text style={styles.balanceNum}>{balance || 0} сом</Text>
-            </View>
-            <Text style={styles.balanceHistory}>История</Text>
-          </TouchableOpacity>
           <FlatList
             contentContainerStyle={styles.flatList}
             data={dataCategory}

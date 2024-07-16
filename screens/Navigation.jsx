@@ -31,8 +31,6 @@ import { LeftoversScreen } from "./LeftoversScreen/LeftoversScreen";
 /////// ReturnScreen
 import { MyReturnsScreen } from "./ReturnScreen/MyReturnsScreen/MyReturnsScreen";
 import { DetailedInvoiceReturn } from "./ReturnScreen/DetailedInvoiceReturn/DetailedInvoiceReturn";
-import { AcceptReturnHistoryScreen } from "./ReturnScreen/AcceptReturnHistoryScreen/AcceptReturnHistoryScreen";
-import { EveryReturnScreen } from "./ReturnScreen/EveryReturnScreen/EveryReturnScreen";
 
 /////// fns
 import { changeLocalData } from "../store/reducers/saveDataSlice";
@@ -172,15 +170,6 @@ export const Navigation = () => {
                 component={DetailedInvoiceReturn}
                 options={{ title: "Принятие накладной" }}
               />
-              {/* <Stack.Screen
-                name="AcceptReturnHistoryScreen"
-                component={AcceptReturnHistoryScreen}
-                options={{ title: "Список накладных возврата" }}
-              /> */}
-              {/* <Stack.Screen
-                name="EveryReturnScreen"
-                component={EveryReturnScreen}
-              /> */}
             </>
           </>
         )}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Vibration, Dimensions } from "react-native";
 import { Camera } from "expo-camera";
 import BarcodeMask from "react-native-barcode-mask";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 //////// hooks
 import { useDispatch, useSelector } from "react-redux";

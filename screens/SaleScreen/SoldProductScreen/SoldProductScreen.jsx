@@ -46,7 +46,7 @@ export const SoldProductScreen = ({ route, navigation }) => {
 
   const endSale = () => {
     ///// отправка накладной с продуктами (полная продажа)
-    dispatch(endSaleProds({ invoice_guid, ...saleDiscount }));
+    dispatch(endSaleProds({ ...saleDiscount, invoice_guid }));
     setModal(false);
   };
 
@@ -90,6 +90,7 @@ export const SoldProductScreen = ({ route, navigation }) => {
                     <View style={[styles.line, styles.degMinus]} />
                   </TouchableOpacity>
                 </View>
+
                 <View>
                   <Text style={styles.title}>{item?.product_name}</Text>
                 </View>
