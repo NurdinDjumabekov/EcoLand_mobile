@@ -23,7 +23,7 @@ import { AddBonusScreen } from "./CardsScreen/AddBonusScreen/AddBonusScreen";
 import { LoginScreen } from "./LoginScreen/LoginScreen";
 
 ////// AllCategScreen
-import { AllCategScreen } from "./AllCategScreen/AllCategScreen";
+import AllCategScreen from "./AllCategScreen/AllCategScreen";
 
 ////// LeftoversScreen
 import { LeftoversScreen } from "./LeftoversScreen/LeftoversScreen";
@@ -36,8 +36,8 @@ import { DetailedInvoiceReturn } from "./ReturnScreen/DetailedInvoiceReturn/Deta
 import { changeLocalData } from "../store/reducers/saveDataSlice";
 
 ////// components
-import { LogOut } from "../components/Header/LogOut/LogOut";
 import { Preloader } from "../common/Preloader/Preloader";
+import LogOut from "../components/Header/LogOut/LogOut";
 import UserInfo from "../components/Header/UserInfo/UserInfo";
 
 /////// helpers

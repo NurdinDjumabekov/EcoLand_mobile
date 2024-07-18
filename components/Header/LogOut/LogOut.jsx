@@ -17,7 +17,7 @@ import { clearLogin } from "../../../store/reducers/stateSlice";
 ////style
 import styles from "./style";
 
-export const LogOut = ({ navigation }) => {
+const LogOut = ({ navigation }) => {
   const [modal, setMoodal] = useState(false);
   const dispatch = useDispatch();
 
@@ -64,3 +64,5 @@ export const LogOut = ({ navigation }) => {
     </>
   );
 };
+
+export default LogOut;

@@ -7,8 +7,8 @@ import { FlatList, SafeAreaView } from "react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 
 /////components
-import { SearchProdsSale } from "../../../components/SaleProd/SearchProdsSale/SearchProdsSale";
-import { EveryProduct } from "../../../components/SaleProd/EveryProduct/EveryProduct";
+import SearchProdsSale from "../../../components/SaleProd/SearchProdsSale/SearchProdsSale";
+import EveryProduct from "../../../components/SaleProd/EveryProduct/EveryProduct";
 
 ////fns
 import { clearListProdSearch } from "../../../store/reducers/requestSlice";
@@ -56,7 +56,6 @@ const SaleSearchScreen = ({ navigation, route }) => {
                   obj={item}
                   index={index}
                   navigation={navigation}
-                  type={"sale"}
                 />
               )}
               keyExtractor={(item, index) => `${item?.guid}${index}`}

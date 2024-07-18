@@ -1,44 +1,18 @@
 ///// tags
 import { View } from "react-native";
-import { SafeAreaView, FlatList, RefreshControl } from "react-native";
+import { SafeAreaView, FlatList } from "react-native";
 import { ViewContainer } from "../../customsTags/ViewContainer";
 
-///// hooks
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useFocusEffect } from "@react-navigation/native";
-
 /////  components
-import { EveryCategory } from "../../components/AllCategory/EveryCategory";
+import EveryCategory from "../../components/AllCategory/EveryCategory";
 
 ////// helpers
 import { dataCategory } from "../../helpers/Data";
-import { getLocalDataUser } from "../../helpers/returnDataUser";
-
-///// fns
-import { getBalance } from "../../store/reducers/requestSlice";
-import { changeLocalData } from "../../store/reducers/saveDataSlice";
 
 ////style
 import styles from "./style";
 
-export const AllCategScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.saveDataSlice);
-  const { preloader, balance } = useSelector((state) => state.requestSlice);
-
-  const getData = async () => {
-    await getLocalDataUser({ changeLocalData, dispatch });
-    await dispatch(getBalance(data?.seller_guid));
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      getData();
-    }, [])
-  );
-
+const AllCategScreen = ({ navigation }) => {
   return (
     <ViewContainer>
       <SafeAreaView>
@@ -51,12 +25,11 @@ export const AllCategScreen = ({ navigation }) => {
             )}
             keyExtractor={(item, index) => `${item.guid}${index}`}
             numColumns={2}
-            refreshControl={
-              <RefreshControl refreshing={preloader} onRefresh={getData} />
-            }
           />
         </View>
       </SafeAreaView>
     </ViewContainer>
   );
 };
+
+export default AllCategScreen;

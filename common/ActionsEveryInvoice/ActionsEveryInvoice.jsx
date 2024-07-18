@@ -20,6 +20,7 @@ import { changeSearchProd } from "../../store/reducers/stateSlice";
 import styles from "./style";
 
 export const ActionsEveryInvoice = ({ location, type }) => {
+  ////// для выбора категорий и подкатегорий в продаже и остатках
   const dispatch = useDispatch();
 
   const { listCategory, listWorkShopSale } = useSelector(
@@ -77,10 +78,6 @@ export const ActionsEveryInvoice = ({ location, type }) => {
     ////// очищаю временный данные для продажи
   };
 
-  // console.log(activeSelectCategory, "activeSelectCategory");
-  // console.log(activeSelectWorkShop, "activeSelectWorkShop");
-  // console.log(listCategory, "listCategory");
-
   return (
     <View style={styles.parentSelects}>
       <Text style={styles.choiceCateg}>Выберите цех</Text>
@@ -90,7 +87,6 @@ export const ActionsEveryInvoice = ({ location, type }) => {
           items={listWorkShopSale}
           useNativeAndroidPickerStyle={false}
           value={activeSelectWorkShop}
-          // placeholder={{}}
           style={styles}
         />
         <View style={styles.arrow}></View>
@@ -102,7 +98,6 @@ export const ActionsEveryInvoice = ({ location, type }) => {
           items={listCategory}
           useNativeAndroidPickerStyle={false}
           value={activeSelectCategory}
-          // placeholder={{}}
           style={styles}
         />
         <View style={styles.arrow}></View>

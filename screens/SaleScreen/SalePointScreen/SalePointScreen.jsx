@@ -14,7 +14,7 @@ import { changeActiveSelectCategory } from "../../../store/reducers/stateSlice";
 import { changeActiveSelectWorkShop } from "../../../store/reducers/stateSlice";
 
 /////// components
-import { EveryInvoiceSale } from "../../../components/SaleProd/EveryInvoiceSale/EveryInvoiceSale";
+import EveryInvoiceSale from "../../../components/SaleProd/EveryInvoiceSale/EveryInvoiceSale";
 
 /////// style
 import styles from "./style";

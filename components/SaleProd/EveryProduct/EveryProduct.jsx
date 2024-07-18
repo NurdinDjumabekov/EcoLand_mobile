@@ -1,27 +1,16 @@
 /////// tags
 import { Text, TouchableOpacity, View } from "react-native";
 
-////// hooks
-import { useDispatch } from "react-redux";
-
-///// fns
-import { changeTemporaryData } from "../../../store/reducers/stateSlice";
-
 ///// style
 import styles from "./style";
 
-export const EveryProduct = (props) => {
-  //// SalePointScreen - для продажи
+const EveryProduct = (props) => {
+  //// каждый товар для продажи
+
   const { obj, index, navigation, type } = props;
 
-  const dispatch = useDispatch();
-
   const addInTemporary = () => {
-    if (type == "sale") {
-      navigation.navigate("EverySaleProdScreen", { obj });
-    } else if (type == "soputka") {
-      dispatch(changeTemporaryData(obj));
-    }
+    navigation.navigate("EverySaleProdScreen", { obj });
   };
 
   return (
@@ -40,3 +29,5 @@ export const EveryProduct = (props) => {
     </TouchableOpacity>
   );
 };
+
+export default EveryProduct;

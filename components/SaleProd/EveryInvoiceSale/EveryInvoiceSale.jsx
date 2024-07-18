@@ -9,17 +9,18 @@ import { SafeAreaView, Text, View } from "react-native";
 
 /// components
 import { ActionsEveryInvoice } from "../../../common/ActionsEveryInvoice/ActionsEveryInvoice";
-import { EveryProduct } from "../EveryProduct/EveryProduct";
+import EveryProduct from "../EveryProduct/EveryProduct";
 
 /////fns
 import { getWorkShopsGorSale } from "../../../store/reducers/requestSlice";
 import { changeSearchProd } from "../../../store/reducers/stateSlice";
-import SaleMenu from "../SaleMenu/SaleMenu";
 
 ////style
 import styles from "./style";
+import SaleMenu from "../SaleMenu/SaleMenu";
 
-export const EveryInvoiceSale = ({ navigation }) => {
+const EveryInvoiceSale = ({ navigation }) => {
+  ///// главная страница  продаж
   const dispatch = useDispatch();
   const route = useRoute();
 
@@ -62,7 +63,6 @@ export const EveryInvoiceSale = ({ navigation }) => {
                 <EveryProduct
                   obj={item}
                   index={index}
-                  type={"sale"}
                   navigation={navigation}
                 />
               )}
@@ -78,3 +78,5 @@ export const EveryInvoiceSale = ({ navigation }) => {
     </View>
   );
 };
+
+export default EveryInvoiceSale;

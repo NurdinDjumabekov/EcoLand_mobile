@@ -20,6 +20,8 @@ import { changeSearchProd } from "../../../store/reducers/stateSlice";
 import styles from "./style";
 
 const SaleMenu = ({ navigation }) => {
+  //// menu В продаж (поиск, сканирование и ввод кода товара)
+
   const dispatch = useDispatch();
   const refInput = useRef();
 

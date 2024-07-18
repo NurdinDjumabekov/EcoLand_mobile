@@ -14,7 +14,7 @@ import { addProductInvoiceTT } from "../../../store/reducers/requestSlice.js";
 ////style
 import styles from "./style.js";
 
-const EverySaleProdScreen = ({ route, navigation }) => {
+const EverySaleProdScreen = ({ navigation, route }) => {
   const { obj } = route.params;
 
   const dispatch = useDispatch();
@@ -44,11 +44,13 @@ const EverySaleProdScreen = ({ route, navigation }) => {
     }
 
     dispatch(getEveryProd({ guid: obj?.guid, seller_guid: data?.seller_guid }));
-    /////// получаю каждый прожуке для продажи
+    /////// получаю каждый продукт для продажи
   }, []);
 
   const check_unit = everyProdSale?.unit_codeid == 1;
   const { sale_price_discount } = everyProdSale;
+
+  const check_discount = sale_price_discount != 0 || !!sale_price_discount;
 
   const typeProd = `Введите ${check_unit ? "количество" : "вес"}`;
 
@@ -58,15 +60,11 @@ const EverySaleProdScreen = ({ route, navigation }) => {
     } else {
       const { price, sale_price, count_type } = everyProdSale;
 
-      if (!!sale_price_discount) {
-        const sendData = { guid: obj?.guid, count: sum, sale_price_discount };
-        const data = { invoice_guid: infoKassa?.guid, price, ...sendData };
-        dispatch(addProductInvoiceTT({ data, navigation, count_type }));
-      } else {
-        const sendData = { guid: obj?.guid, count: sum, sale_price };
-        const data = { invoice_guid: infoKassa?.guid, price, ...sendData };
-        dispatch(addProductInvoiceTT({ data, navigation, count_type }));
-      }
+      const sendData = { guid: obj?.guid, count: sum, sale_price_discount };
+      const invoice_guid = { invoice_guid: infoKassa?.guid };
+
+      const data = { ...sendData, ...invoice_guid, price, sale_price };
+      dispatch(addProductInvoiceTT({ data, navigation, count_type }));
       ///// продаю товар
     }
   };
@@ -85,16 +83,14 @@ const EverySaleProdScreen = ({ route, navigation }) => {
         <View style={[styles.line, styles.deg]} />
         <View style={[styles.line, styles.degMinus]} />
       </TouchableOpacity>
-      <Text style={styles.leftovers}>
-        Остаток: {everyProdSale?.end_outcome} {everyProdSale?.unit}
-      </Text>
       <View style={styles.addDataBlock}>
         <View style={styles.inputBlock}>
           <Text style={styles.inputTitle}>
-            Цена продажи {everyProdSale?.unit && `за ${everyProdSale?.unit}`}
+            {check_discount ? "Скидочная цена " : "Цена продажи "}
+            {everyProdSale?.unit && `за ${everyProdSale?.unit}`}
           </Text>
           <View style={styles.inputPrice}>
-            {!!sale_price_discount ? (
+            {check_discount ? (
               <>
                 <Text style={styles.priceNone}>
                   {everyProdSale?.sale_price} сом

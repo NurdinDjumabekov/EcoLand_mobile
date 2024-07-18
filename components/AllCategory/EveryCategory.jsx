@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 ////style
 import styles from "./style";
 
-export const EveryCategory = ({ obj, navigation }) => {
+const EveryCategory = ({ obj, navigation }) => {
   const clickCateg = () => {
     navigation.navigate(`${obj.link}`, {
       id: obj?.codeid,
@@ -23,3 +23,5 @@ export const EveryCategory = ({ obj, navigation }) => {
     </TouchableOpacity>
   );
 };
+
+export default EveryCategory;

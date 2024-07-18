@@ -46,7 +46,7 @@ export const SoldProductScreen = ({ route, navigation }) => {
 
   const endSale = () => {
     ///// отправка накладной с продуктами (полная продажа)
-    dispatch(endSaleProds({ ...saleDiscount, invoice_guid }));
+    dispatch(endSaleProds({ ...saleDiscount, invoice_guid, navigation }));
     setModal(false);
   };
 

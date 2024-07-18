@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 import { ViewButton } from "../../../customsTags/ViewButton";
 import ResultCounts from "../../../common/ResultCounts/ResultCounts";
-import { TablesRevision } from "../../Tables/TablesRevision/TablesRevision";
+import TablesReturn from "../../Tables/TablesReturn/TablesReturn";
 
 ///states
 import { getMyEveryInvoiceReturn } from "../../../store/reducers/requestSlice";
@@ -30,8 +30,6 @@ export const DetailedInvoiceReturn = ({ route, navigation }) => {
   const clickOkay = () => setAcceptOk(true);
 
   const { everyInvoiceReturn } = useSelector((state) => state.requestSlice);
-  const { acceptConfirmInvoice } = useSelector((state) => state.stateSlice);
-  //// delete
   const { data } = useSelector((state) => state.saveDataSlice);
 
   const acceptInvoiceFN = () => {
@@ -56,7 +54,7 @@ export const DetailedInvoiceReturn = ({ route, navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <TablesRevision list={everyInvoiceReturn} />
+        <TablesReturn list={everyInvoiceReturn} />
         <View style={styles.total}>
           <ResultCounts list={everyInvoiceReturn} />
           <Text style={styles.totalItemCount}>

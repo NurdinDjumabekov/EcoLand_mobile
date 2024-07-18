@@ -22,7 +22,8 @@ import searchIcon from "../../../assets/icons/searchIcon.png";
 ////style
 import styles from "./style";
 
-export const SearchProdsSale = ({}) => {
+const SearchProdsSale = ({}) => {
+  ///// поис товаров в продаже
   const refInput = useRef();
 
   const dispatch = useDispatch();
@@ -73,3 +74,5 @@ export const SearchProdsSale = ({}) => {
     </View>
   );
 };
+
+export default SearchProdsSale;

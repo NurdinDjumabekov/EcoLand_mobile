@@ -1,8 +1,5 @@
 ////// tags
-import { Image, View, Text } from "react-native";
-
-////// imgs
-import userImg from "../../../assets/icons/user.png";
+import { View, Text } from "react-native";
 
 ////// helpers
 import { getLocalDataUser } from "../../../helpers/returnDataUser";
@@ -28,7 +25,6 @@ const UserInfo = () => {
 
   return (
     <View style={styles.parentBlock}>
-      {/* <Image style={styles.user} source={userImg} /> */}
       <View>
         <Text style={styles.userRole} numberOfLines={1} ellipsizeMode="tail">
           {data?.point_name}

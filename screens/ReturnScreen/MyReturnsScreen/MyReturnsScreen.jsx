@@ -30,7 +30,7 @@ export const MyReturnsScreen = ({ navigation }) => {
     getData();
   }, []);
 
-  // console.log(listMyInvoiceReturn, "listMyInvoiceReturn");
+  console.log(listMyInvoiceReturn, "listMyInvoiceReturn");
 
   return (
     <SafeAreaView>
